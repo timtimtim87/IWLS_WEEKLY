@@ -1,0 +1,214 @@
+ASSET COUNT BY DEVIATION BINS ANALYSIS REPORT
+Generated: 2025-09-04 15:24:41
+Purpose: Identify how many unique assets fall into each deviation severity bin
+================================================================================
+
+UNIQUE ASSET COUNT ANALYSIS BY DEVIATION BINS
+============================================================
+Analysis: How many different assets experienced each level of underperformance
+
+📂 Loading: /Users/tim/CODE_PROJECTS/IWLS_WEEKLY/RESULTS/IWLS_WITH_FORWARD_PERFORMANCE.csv
+✅ Successfully loaded 916,878 records
+📊 Records with deviation data: 783,467
+📉 Records in negative deviation bins (-40% to <-75%): 31,681
+🏢 Total unique assets in dataset: 79
+📅 Year range: 1992 - 2025
+📊 Assets with negative deviation records: AAPL, ADBE, AMAT, AMGN, AMZN, AON, AVGO, AXP, BA, BAC, BKNG, BLK, BSX, BX, C, CAT, CMCSA, CME, COST, CRM, CRWD, CSCO, DASH, DHR, DIS, GE, GOOGL, GS, HD, HON, IBM, INTC, INTU, ISRG, JPM, KO, LIN, LLY, LOW, MCD, MCK, MCO, META, MMM, MRK, MS, MSFT, MSI, MU, NEE, NFLX, NKE, NOW, NVDA, ORCL, PG, PGR, PLTR, QCOM, RTX, SBUX, SCHW, SNPS, SPGI, SYK, T, TMO, TMUS, TSLA, TXN, UBER, UNH, UNP, UPS, VZ, WFC, WM, WMT, XOM
+
+🎯 UNIQUE ASSET COUNTS BY DEVIATION BIN AND YEAR
+================================================================================
+  Year |   -40--45 |   -45--50 |   -50--55 |   -55--60 |   -60--65 |   -65--70 |   -70--75 | Below -75 |   Total
+----------------------------------------------------------------------------------------------------------------
+  1992 |         4 |         2 |         2 |         0 |         0 |         0 |         0 |         0 |       4
+  1993 |        15 |        10 |         4 |         4 |         2 |         2 |         0 |         0 |      16
+  1994 |        12 |         8 |         5 |         3 |         1 |         0 |         0 |         0 |      12
+  1995 |         5 |         3 |         2 |         1 |         0 |         0 |         0 |         0 |       5
+  1996 |         6 |         4 |         4 |         3 |         2 |         1 |         0 |         0 |       6
+  1997 |         7 |         3 |         3 |         1 |         1 |         1 |         0 |         0 |       7
+  1998 |        10 |         9 |         6 |         3 |         3 |         1 |         0 |         0 |      10
+  1999 |        12 |        10 |         6 |         5 |         4 |         3 |         3 |         2 |      13
+  2000 |        27 |        21 |        14 |        11 |         6 |         6 |         6 |         4 |      27
+  2001 |        28 |        26 |        19 |        15 |        11 |         6 |         3 |         4 |      30
+  2002 |        31 |        29 |        24 |        21 |        17 |         9 |         6 |         4 |      33
+  2003 |        20 |        16 |        11 |         8 |         5 |         3 |         2 |         2 |      20
+  2004 |         3 |         2 |         1 |         1 |         1 |         0 |         0 |         0 |       3
+  2005 |         1 |         1 |         1 |         0 |         0 |         0 |         0 |         0 |       1
+  2006 |         1 |         2 |         2 |         1 |         1 |         0 |         0 |         0 |       2
+  2007 |         9 |         6 |         3 |         2 |         0 |         0 |         0 |         0 |       9
+  2008 |        43 |        35 |        30 |        27 |        21 |        19 |        13 |         9 |      45
+  2009 |        45 |        39 |        33 |        26 |        25 |        21 |        13 |         8 |      46
+  2010 |         4 |         2 |         2 |         2 |         1 |         0 |         0 |         0 |       4
+  2011 |         1 |         1 |         1 |         1 |         1 |         0 |         0 |         0 |       1
+  2012 |         2 |         2 |         2 |         1 |         1 |         1 |         0 |         0 |       2
+  2013 |         1 |         0 |         0 |         0 |         0 |         0 |         0 |         0 |       1
+  2014 |         1 |         0 |         0 |         0 |         0 |         0 |         0 |         0 |       1
+  2015 |         3 |         1 |         1 |         0 |         0 |         0 |         0 |         0 |       3
+  2016 |         8 |         4 |         2 |         2 |         1 |         0 |         0 |         0 |       8
+  2017 |         3 |         1 |         0 |         0 |         0 |         0 |         0 |         0 |       3
+  2018 |         5 |         3 |         2 |         2 |         1 |         1 |         0 |         0 |       5
+  2019 |         4 |         2 |         2 |         2 |         1 |         0 |         0 |         0 |       4
+  2020 |        14 |         5 |         3 |         1 |         1 |         1 |         1 |         1 |      14
+  2021 |         1 |         1 |         1 |         0 |         0 |         0 |         0 |         0 |       1
+  2022 |        22 |        14 |        12 |         8 |         6 |         4 |         3 |         1 |      22
+  2023 |        14 |        10 |         7 |         5 |         2 |         1 |         1 |         0 |      14
+  2024 |         2 |         1 |         1 |         1 |         1 |         1 |         0 |         0 |       2
+  2025 |         4 |         1 |         1 |         1 |         1 |         0 |         0 |         0 |       4
+----------------------------------------------------------------------------------------------------------------
+
+📈 SUMMARY STATISTICS
+==================================================
+
+🏆 MOST ACTIVE DEVIATION BINS (by total unique assets):
+      -40% to -45%: 368 total assets | 10.8 avg/year | 34 years active
+      -45% to -50%: 274 total assets |  8.6 avg/year | 32 years active
+      -50% to -55%: 207 total assets |  6.7 avg/year | 31 years active
+      -55% to -60%: 158 total assets |  5.9 avg/year | 27 years active
+      -60% to -65%: 117 total assets |  4.7 avg/year | 25 years active
+      -65% to -70%:  81 total assets |  4.8 avg/year | 17 years active
+      -70% to -75%:  51 total assets |  5.1 avg/year | 10 years active
+        Below -75%:  35 total assets |  3.9 avg/year | 9 years active
+
+📊 YEARLY TOTALS:
+   1992:  4 unique assets |  158 total records |  39.5 records/asset
+   1993: 16 unique assets | 1,383 total records |  86.4 records/asset
+   1994: 12 unique assets | 1,156 total records |  96.3 records/asset
+   1995:  5 unique assets |  361 total records |  72.2 records/asset
+   1996:  6 unique assets |  554 total records |  92.3 records/asset
+   1997:  7 unique assets |  368 total records |  52.6 records/asset
+   1998: 10 unique assets |  855 total records |  85.5 records/asset
+   1999: 13 unique assets | 1,054 total records |  81.1 records/asset
+   2000: 27 unique assets | 2,410 total records |  89.3 records/asset
+   2001: 30 unique assets | 3,142 total records | 104.7 records/asset
+   2002: 33 unique assets | 4,287 total records | 129.9 records/asset
+   2003: 20 unique assets | 1,500 total records |  75.0 records/asset
+   2004:  3 unique assets |   84 total records |  28.0 records/asset
+   2005:  1 unique assets |  102 total records | 102.0 records/asset
+   2006:  2 unique assets |  325 total records | 162.5 records/asset
+   2007:  9 unique assets |  364 total records |  40.4 records/asset
+   2008: 45 unique assets | 4,050 total records |  90.0 records/asset
+   2009: 46 unique assets | 4,128 total records |  89.7 records/asset
+   2010:  4 unique assets |  104 total records |  26.0 records/asset
+   2011:  1 unique assets |   52 total records |  52.0 records/asset
+   2012:  2 unique assets |  274 total records | 137.0 records/asset
+   2013:  1 unique assets |    2 total records |   2.0 records/asset
+   2014:  1 unique assets |   26 total records |  26.0 records/asset
+   2015:  3 unique assets |  104 total records |  34.7 records/asset
+   2016:  8 unique assets |  551 total records |  68.9 records/asset
+   2017:  3 unique assets |  104 total records |  34.7 records/asset
+   2018:  5 unique assets |  375 total records |  75.0 records/asset
+   2019:  4 unique assets |  299 total records |  74.8 records/asset
+   2020: 14 unique assets |  565 total records |  40.4 records/asset
+   2021:  1 unique assets |   44 total records |  44.0 records/asset
+   2022: 22 unique assets | 1,853 total records |  84.2 records/asset
+   2023: 14 unique assets |  749 total records |  53.5 records/asset
+   2024:  2 unique assets |  200 total records | 100.0 records/asset
+   2025:  4 unique assets |   98 total records |  24.5 records/asset
+
+🔍 DETAILED ASSET BREAKDOWN FOR KEY BINS
+============================================================
+
+📉 -45% to -50% - Asset Details by Year:
+--------------------------------------------------
+  Year | Count | Records | Assets
+--------------------------------------------------
+  1992 |     2 |      28 | ADBE, COST
+  1993 |    10 |     180 | AAPL, AMGN, BSX, COST, HD, IBM, LLY, MRK, NKE, SYK
+  1994 |     8 |     348 | AMGN, COST, CSCO, HD, NKE, SYK, WM, WMT
+  1995 |     3 |     120 | CSCO, UNH, WM
+  1996 |     4 |     146 | AMAT, MSI, MU, UNH
+  1997 |     3 |     101 | INTU, MU, ORCL
+  1998 |     9 |     278 | ADBE, BA, BSX, LIN, MU, NKE, ORCL, TMO, UNH
+  1999 |    10 |     165 | AON, BA, BSX, KO, LIN, LLY, MCK, PGR, TMO, WM
+  2000 |    21 |     519 | AAPL, AMZN, AON, BAC, BKNG, BSX, CAT, COST, CSCO, HD, HON, INTC, JPM, KO, LLY, MCK, MSFT, NKE, PG, PGR, WM
+  2001 |    26 |     634 | AAPL, ADBE, AMAT, AXP, BKNG, C, COST, CSCO, DIS, GE, HD, HON, INTC, ISRG, JPM, MS, MSFT, MSI, MU, ORCL, PG, QCOM, RTX, SCHW, TXN, WMT
+  2002 |    29 |     885 | AAPL, ADBE, AMAT, AMGN, AMZN, AON, AXP, BKNG, C, CMCSA, CSCO, DIS, GE, HD, HON, IBM, INTC, JPM, MRK, MS, MSI, MU, NFLX, NVDA, ORCL, SCHW, T, TXN, VZ
+  2003 |    16 |     314 | ADBE, AMAT, AMGN, CMCSA, GE, HD, INTC, ISRG, MCD, MSI, MU, NVDA, QCOM, SCHW, T, TXN
+  2004 |     2 |      15 | NVDA, SNPS
+  2005 |     1 |      70 | BSX
+  2006 |     2 |      32 | AMZN, BSX
+  2007 |     6 |     101 | BSX, C, MCO, MU, SBUX, TMUS
+  2008 |    35 |     577 | AAPL, ADBE, AMAT, AMZN, AXP, BA, BAC, BKNG, BLK, BX, C, CAT, CME, CRM, GE, GOOGL, GS, HD, HON, ISRG, JPM, MCK, MCO, MS, MSI, MU, NEE, NVDA, PGR, SPGI, SYK, TMO, TMUS, TXN, UNH
+  2009 |    39 |     697 | AAPL, ADBE, AMAT, AXP, BA, BAC, BLK, BX, CAT, CME, COST, CRM, DIS, GE, GOOGL, GS, HON, ISRG, JPM, LOW, MCK, MCO, MS, MSFT, MSI, MU, NVDA, PGR, RTX, SBUX, SCHW, SPGI, SYK, TMO, TMUS, TXN, UNH, UNP, WFC
+  2010 |     2 |      27 | C, TMUS
+  2011 |     1 |      11 | NFLX
+  2012 |     2 |      53 | META, NFLX
+  2015 |     1 |      48 | MU
+  2016 |     4 |     109 | AXP, MCK, MU, TSLA
+  2017 |     1 |       2 | TSLA
+  2018 |     3 |      61 | GE, META, NVDA
+  2019 |     2 |      55 | GE, NVDA
+  2020 |     5 |     197 | BA, C, UBER, WFC, XOM
+  2021 |     1 |      25 | BA
+  2022 |    14 |     501 | ADBE, AMZN, CRM, CRWD, DASH, INTC, ISRG, META, NFLX, NKE, NOW, NVDA, PLTR, TSLA
+  2023 |    10 |     248 | ADBE, AMZN, CRM, CRWD, DASH, INTC, META, NEE, NOW, TSLA
+  2024 |     1 |      33 | TSLA
+  2025 |     1 |      14 | UNH
+
+📉 -50% to -55% - Asset Details by Year:
+--------------------------------------------------
+  Year | Count | Records | Assets
+--------------------------------------------------
+  1992 |     2 |      19 | ADBE, COST
+  1993 |     4 |     115 | AAPL, AMGN, COST, NKE
+  1994 |     5 |     216 | AMGN, COST, CSCO, HD, NKE
+  1995 |     2 |      84 | CSCO, UNH
+  1996 |     4 |      85 | AMAT, MSI, MU, UNH
+  1997 |     3 |      72 | INTU, MU, ORCL
+  1998 |     6 |      95 | BA, BSX, MU, NKE, ORCL, TMO
+  1999 |     6 |     112 | BSX, KO, MCK, PGR, TMO, WM
+  2000 |    14 |     362 | AAPL, AMZN, AON, BKNG, BSX, HON, INTC, LLY, MCK, MSFT, NKE, PG, PGR, WM
+  2001 |    19 |     412 | ADBE, AMAT, AXP, BKNG, CSCO, DIS, GE, HD, HON, INTC, ISRG, MS, MSFT, MSI, MU, ORCL, QCOM, SCHW, TXN
+  2002 |    24 |     713 | ADBE, AMAT, AMGN, AMZN, AON, BKNG, C, CMCSA, CSCO, GE, HD, IBM, INTC, JPM, MS, MSI, MU, NFLX, NVDA, ORCL, QCOM, SCHW, T, TXN
+  2003 |    11 |     202 | AMAT, GE, HD, INTC, ISRG, MCD, MU, NVDA, QCOM, SCHW, TXN
+  2004 |     1 |       4 | NVDA
+  2005 |     1 |       8 | BSX
+  2006 |     2 |      81 | AMZN, BSX
+  2007 |     3 |      51 | BSX, MCO, SBUX
+  2008 |    30 |     619 | AAPL, ADBE, AMAT, AXP, BA, BAC, BLK, BX, C, CAT, CME, CRM, GE, GOOGL, GS, HON, ISRG, JPM, MCK, MCO, MS, MSI, MU, NVDA, SBUX, SPGI, TMO, TMUS, TXN, UNH
+  2009 |    33 |     474 | AAPL, ADBE, AMAT, AXP, BA, BAC, BLK, BX, CAT, CME, CRM, DIS, GE, GOOGL, GS, HON, ISRG, JPM, MCO, MS, MSI, MU, NVDA, RTX, SBUX, SCHW, SPGI, SYK, TMUS, TXN, UNH, UNP, WFC
+  2010 |     2 |      27 | C, TMUS
+  2011 |     1 |       8 | NFLX
+  2012 |     2 |      49 | META, NFLX
+  2015 |     1 |       3 | MU
+  2016 |     2 |      77 | MU, TSLA
+  2018 |     2 |     149 | GE, NVDA
+  2019 |     2 |     116 | GE, NVDA
+  2020 |     3 |      44 | BA, WFC, XOM
+  2021 |     1 |      17 | BA
+  2022 |    12 |     310 | ADBE, AMZN, CRM, CRWD, DASH, INTC, META, NFLX, NKE, NOW, NVDA, TSLA
+  2023 |     7 |     133 | ADBE, AMZN, CRWD, DASH, META, NOW, TSLA
+  2024 |     1 |      24 | TSLA
+  2025 |     1 |      57 | UNH
+
+📉 -55% to -60% - Asset Details by Year:
+--------------------------------------------------
+  Year | Count | Records | Assets
+--------------------------------------------------
+  1993 |     4 |     232 | AAPL, AMGN, COST, NKE
+  1994 |     3 |     109 | AMGN, COST, CSCO
+  1995 |     1 |      27 | UNH
+  1996 |     3 |      79 | AMAT, MU, UNH
+  1997 |     1 |      23 | MU
+  1998 |     3 |      67 | MU, ORCL, TMO
+  1999 |     5 |     202 | BSX, MCK, PGR, TMO, WM
+  2000 |    11 |     251 | AMZN, AON, BKNG, BSX, LLY, MCK, MSFT, NKE, PG, PGR, WM
+  2001 |    15 |     330 | AMAT, AXP, BKNG, CSCO, GE, HD, INTC, ISRG, MS, MSFT, MSI, MU, QCOM, SCHW, TXN
+  2002 |    21 |     609 | ADBE, AMAT, AMGN, AMZN, AON, BKNG, CMCSA, CSCO, GE, HD, IBM, INTC, JPM, MS, MU, NFLX, NVDA, ORCL, QCOM, SCHW, TXN
+  2003 |     8 |     161 | AMAT, HD, ISRG, MU, NVDA, QCOM, SCHW, TXN
+  2004 |     1 |       5 | NVDA
+  2006 |     1 |      99 | BSX
+  2007 |     2 |      11 | MCO, SBUX
+  2008 |    27 |     733 | AAPL, ADBE, AMAT, AXP, BA, BAC, BLK, BX, C, CAT, CME, CRM, GE, GOOGL, GS, HON, ISRG, MCK, MCO, MS, MSI, MU, NVDA, SBUX, SPGI, TXN, UNH
+  2009 |    26 |     538 | AAPL, ADBE, AXP, BA, BAC, BLK, BX, CAT, CME, CRM, GE, GOOGL, GS, HON, ISRG, JPM, MCO, MS, MSI, MU, NVDA, SBUX, SPGI, TMUS, UNH, WFC
+  2010 |     2 |      17 | C, TMUS
+  2011 |     1 |      24 | NFLX
+  2012 |     1 |      37 | NFLX
+  2016 |     2 |     106 | MU, TSLA
+  2018 |     2 |      34 | GE, NVDA
+  2019 |     2 |      53 | GE, NVDA
+  2020 |     1 |      56 | BA
+  2022 |     8 |     211 | ADBE, AMZN, CRM, DASH, META, NFLX, NOW, TSLA
+  2023 |     5 |      63 | AMZN, CRWD, DASH, NOW, TSLA
+  2024 |     1 |      59 | TSLA
+  2025 |     1 |       9 | UNH
+
