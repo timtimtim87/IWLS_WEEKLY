@@ -1,0 +1,62 @@
+# Ignore data files and results
+DATA/
+RESULTS/
+*.csv
+*.xlsx
+*.json
+
+# Ignore large output files
+*.png
+*.jpg
+*.jpeg
+*.pdf
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Keep these folders in git but ignore their contents
+DATA/*
+!DATA/.gitkeep
+RESULTS/*
+!RESULTS/.gitkeep
