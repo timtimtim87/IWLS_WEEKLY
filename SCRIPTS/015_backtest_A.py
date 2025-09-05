@@ -382,7 +382,7 @@ def run_backtest():
     
     backtester = UnderperformanceBacktester(
         initial_capital=10000,
-        num_positions=3,
+        num_positions=5,
         profit_target=20.0  # 50% profit target
     )
     

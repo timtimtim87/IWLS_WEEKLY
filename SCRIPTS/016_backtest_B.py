@@ -472,10 +472,10 @@ def run_backtest():
     
     backtester = UnderperformanceBacktester(
         initial_capital=10000,
-        num_positions=1,
+        num_positions=3,
         profit_target=100.0,  # 50% profit target
-        rebalance_threshold=65.0,  # Rebalance if total deviation > 250%
-        rebalance_wait_days=300  # Wait 180 days between rebalances
+        rebalance_threshold=200.0,  # Rebalance if total deviation > 250%
+        rebalance_wait_days=200  # Wait 180 days between rebalances
     )
     
     # Run backtest
