@@ -5,25 +5,21 @@ from datetime import datetime, timedelta
 import warnings
 warnings.filterwarnings('ignore')
 
-class UnderperformanceBacktester:
+class RollingWindowBacktester:
     """
-    Enhanced backtest strategy:
-    1. Find 5 most negatively deviated stocks
-    2. Split $10,000 equally amongst them ($2,000 each)
-    3. Track portfolio value daily
-    4. Exit when portfolio hits +50% total return
-    5. Immediately re-enter with new worst 5 stocks
-    6. REBALANCING: If sum of top 5 worst deviations > 250% AND it's been 180+ days since last rebalance,
-       exit current positions and enter the new worst 5
+    Rolling Window Strategy:
+    1. Find 3 most negatively deviated stocks each day
+    2. Calculate sum of their absolute deviations
+    3. Compare to 365-day rolling window maximum
+    4. If current sum > all previous 365 days, enter new positions
+    5. Exit old positions when entering new ones
+    6. No profit targets - only rebalance based on rolling window maximum
     """
     
-    def __init__(self, initial_capital=10000, num_positions=5, profit_target=50.0, 
-                 rebalance_threshold=250.0, rebalance_wait_days=180):
+    def __init__(self, initial_capital=10000, num_positions=3, rolling_window_days=365):
         self.initial_capital = initial_capital
         self.num_positions = num_positions
-        self.profit_target = profit_target  # 50% profit target
-        self.rebalance_threshold = rebalance_threshold  # 250% total deviation threshold
-        self.rebalance_wait_days = rebalance_wait_days  # 180 day waiting period
+        self.rolling_window_days = rolling_window_days
         
     def load_data(self):
         """Load the IWLS data"""
@@ -63,7 +59,7 @@ class UnderperformanceBacktester:
         return clean_data
     
     def find_worst_performers(self, df, current_date, lookback_days=7):
-        """Find the 5 most negatively deviated stocks around current date"""
+        """Find the N most negatively deviated stocks around current date"""
         start_date = current_date - timedelta(days=lookback_days)
         end_date = current_date + timedelta(days=lookback_days)
         
@@ -96,27 +92,11 @@ class UnderperformanceBacktester:
         
         return opportunities
     
-    def check_rebalance_trigger(self, df, current_date, last_rebalance_date):
-        """Check if rebalancing conditions are met"""
-        # Check if enough time has passed since last rebalance
-        if last_rebalance_date is not None:
-            days_since_rebalance = (current_date - last_rebalance_date).days
-            if days_since_rebalance < self.rebalance_wait_days:
-                return False, 0.0, []
-        
-        # Find current worst performers
-        worst_performers = self.find_worst_performers(df, current_date)
-        
-        if len(worst_performers) < self.num_positions:
-            return False, 0.0, []
-        
-        # Calculate sum of absolute deviations (since they're negative, we take absolute)
-        total_deviation = sum(abs(opp['deviation']) for opp in worst_performers)
-        
-        # Check if threshold is exceeded
-        trigger_rebalance = total_deviation >= self.rebalance_threshold
-        
-        return trigger_rebalance, total_deviation, worst_performers
+    def calculate_deviation_sum(self, opportunities):
+        """Calculate sum of absolute deviations"""
+        if len(opportunities) == 0:
+            return 0.0
+        return sum(abs(opp['deviation']) for opp in opportunities)
     
     def get_current_prices(self, df, assets, current_date, lookback_days=7):
         """Get current prices for a list of assets on or near current date"""
@@ -181,7 +161,7 @@ class UnderperformanceBacktester:
         return positions
     
     def backtest_strategy(self):
-        """Run the backtest"""
+        """Run the rolling window backtest"""
         
         # Load and prepare data
         df = self.load_data()
@@ -194,11 +174,11 @@ class UnderperformanceBacktester:
         start_date = data['date'].min()
         end_date = data['date'].max()
         
-        print(f"\n🚀 STARTING BACKTEST")
+        print(f"\n🚀 STARTING ROLLING WINDOW BACKTEST")
         print("="*70)
         print(f"💰 Initial capital: ${self.initial_capital:,.2f}")
-        print(f"🎯 Strategy: Buy {self.num_positions} worst performers, exit at +{self.profit_target}%")
-        print(f"🔄 Rebalance: If top 5 deviations sum > {self.rebalance_threshold}% and {self.rebalance_wait_days}+ days passed")
+        print(f"🎯 Strategy: Buy {self.num_positions} worst performers when rolling window maximum exceeded")
+        print(f"🔄 Rolling Window: {self.rolling_window_days} days")
         print(f"📅 Backtest period: {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}")
         
         # Get all unique trading dates
@@ -211,67 +191,72 @@ class UnderperformanceBacktester:
         portfolio_number = 0
         completed_portfolios = []
         daily_tracking = []
-        rebalance_events = []
+        entry_events = []
         
-        # Track rebalancing
-        last_rebalance_date = None
+        # Track daily deviation sums for rolling window
+        daily_deviation_sums = {}
         
-        # Start with first portfolio
-        initial_opportunities = self.find_worst_performers(data, start_date)
+        print(f"\n🔍 BUILDING ROLLING WINDOW DATA...")
         
-        if len(initial_opportunities) == 0:
-            print("❌ No initial opportunities found")
-            return None
+        # First pass: Calculate daily deviation sums for all dates
+        for current_date in all_dates:
+            worst_performers = self.find_worst_performers(data, current_date)
+            deviation_sum = self.calculate_deviation_sum(worst_performers)
+            daily_deviation_sums[current_date] = {
+                'sum': deviation_sum,
+                'opportunities': worst_performers
+            }
         
-        # Enter first portfolio
-        active_positions = self.create_positions(initial_opportunities, self.initial_capital)
-        portfolio_number = 1
-        portfolio_entry_date = start_date
-        last_rebalance_date = start_date
-        total_invested = sum(pos['investment'] for pos in active_positions)
-        current_capital -= total_invested
+        print(f"✅ Built deviation sums for {len(daily_deviation_sums)} trading days")
         
-        print(f"\n🔥 Portfolio #1 - {start_date.strftime('%Y-%m-%d')}")
-        print(f"    💰 Invested: ${total_invested:,.2f}")
-        print(f"    🎯 Target Exit: ${total_invested * (1 + self.profit_target/100):,.2f} (+{self.profit_target}%)")
-        print(f"    📊 Assets: {[pos['asset'] for pos in active_positions]}")
-        print(f"    📉 Deviations: {[f'{pos['entry_deviation']:.1f}%' for pos in active_positions]}")
-        
-        # Main backtest loop
+        # Second pass: Run backtest with rolling window logic
         for i, current_date in enumerate(all_dates):
             
-            # Get current prices for active positions
+            # Skip first year to build rolling window
+            if i < self.rolling_window_days:
+                continue
+            
+            current_data = daily_deviation_sums[current_date]
+            current_sum = current_data['sum']
+            current_opportunities = current_data['opportunities']
+            
+            # Get rolling window (previous N days)
+            window_start_idx = max(0, i - self.rolling_window_days)
+            window_dates = all_dates[window_start_idx:i]  # Exclude current day
+            
+            # Find maximum in rolling window
+            window_max = 0.0
+            window_max_date = None
+            for window_date in window_dates:
+                if window_date in daily_deviation_sums:
+                    window_sum = daily_deviation_sums[window_date]['sum']
+                    if window_sum > window_max:
+                        window_max = window_sum
+                        window_max_date = window_date
+            
+            # Check if current sum exceeds rolling window maximum
+            new_entry_signal = current_sum > window_max and len(current_opportunities) == self.num_positions
+            
+            # Calculate current portfolio value if we have positions
+            portfolio_value = 0
             if len(active_positions) > 0:
                 asset_list = [pos['asset'] for pos in active_positions]
                 current_prices = self.get_current_prices(data, asset_list, current_date)
-                
-                # Calculate portfolio value
                 portfolio_value = self.calculate_portfolio_value(active_positions, current_prices)
+            
+            # Handle new entry signal
+            if new_entry_signal:
                 
-                # Calculate return
-                total_invested = sum(pos['investment'] for pos in active_positions)
-                portfolio_return = ((portfolio_value / total_invested) - 1) * 100
-                hold_days = (current_date - portfolio_entry_date).days
-                
-                # Check for profit target exit
-                profit_target_hit = portfolio_return >= self.profit_target
-                
-                # Check for rebalance trigger
-                should_rebalance, total_deviation, rebalance_opportunities = self.check_rebalance_trigger(
-                    data, current_date, last_rebalance_date)
-                
-                # Decide on exit strategy
-                exit_reason = None
-                if profit_target_hit:
-                    exit_reason = f"PROFIT_TARGET (+{portfolio_return:.1f}%)"
-                elif should_rebalance:
-                    exit_reason = f"REBALANCE (deviation sum: {total_deviation:.1f}%)"
-                
-                if exit_reason:
-                    # EXIT CURRENT PORTFOLIO
+                # Exit current positions if any
+                if len(active_positions) > 0:
                     current_capital += portfolio_value
                     
                     # Record completed portfolio
+                    portfolio_entry_date = active_positions[0]['entry_date']  # They should all be the same
+                    total_invested = sum(pos['investment'] for pos in active_positions)
+                    portfolio_return = ((portfolio_value / total_invested) - 1) * 100
+                    hold_days = (current_date - portfolio_entry_date).days
+                    
                     completed_portfolio = {
                         'portfolio_number': portfolio_number,
                         'entry_date': portfolio_entry_date,
@@ -280,7 +265,7 @@ class UnderperformanceBacktester:
                         'invested': total_invested,
                         'exit_value': portfolio_value,
                         'return_pct': portfolio_return,
-                        'exit_reason': exit_reason,
+                        'exit_reason': 'ROLLING_WINDOW_SIGNAL',
                         'assets': [pos['asset'] for pos in active_positions],
                         'entry_deviations': [pos['entry_deviation'] for pos in active_positions]
                     }
@@ -288,54 +273,43 @@ class UnderperformanceBacktester:
                     completed_portfolios.append(completed_portfolio)
                     
                     print(f"\n📤 Portfolio #{portfolio_number} EXIT - {current_date.strftime('%Y-%m-%d')}")
-                    print(f"    📊 Reason: {exit_reason}")
-                    if should_rebalance:
-                        days_since_rebalance = (current_date - last_rebalance_date).days if last_rebalance_date else 0
-                        print(f"    🔄 Days since last rebalance: {days_since_rebalance}")
-                        print(f"    📉 Current worst 5 deviation sum: {total_deviation:.1f}%")
+                    print(f"    📊 Reason: New rolling window maximum detected")
                     print(f"    📈 Return: {portfolio_return:+.1f}% in {hold_days} days")
-                    print(f"    💰 Value: ${portfolio_value:,.2f} -> Total: ${current_capital:,.2f}")
+                    print(f"    💰 Value: ${portfolio_value:,.2f}")
+                
+                # Enter new portfolio
+                if current_capital > 1000:
+                    active_positions = self.create_positions(current_opportunities, current_capital)
+                    portfolio_number += 1
+                    total_invested = sum(pos['investment'] for pos in active_positions)
+                    current_capital -= total_invested
                     
-                    # Track rebalance event if applicable
-                    if should_rebalance:
-                        rebalance_events.append({
-                            'date': current_date,
-                            'total_deviation': total_deviation,
-                            'days_since_last': (current_date - last_rebalance_date).days if last_rebalance_date else 0,
-                            'old_assets': [pos['asset'] for pos in active_positions],
-                            'new_assets': [opp['asset'] for opp in rebalance_opportunities]
-                        })
-                        last_rebalance_date = current_date
+                    # Record entry event
+                    entry_events.append({
+                        'date': current_date,
+                        'portfolio_number': portfolio_number,
+                        'deviation_sum': current_sum,
+                        'rolling_window_max': window_max,
+                        'window_max_date': window_max_date,
+                        'assets': [opp['asset'] for opp in current_opportunities],
+                        'deviations': [opp['deviation'] for opp in current_opportunities],
+                        'invested': total_invested
+                    })
                     
-                    # IMMEDIATELY ENTER NEW PORTFOLIO
-                    if should_rebalance:
-                        new_opportunities = rebalance_opportunities
-                    else:
-                        new_opportunities = self.find_worst_performers(data, current_date)
+                    print(f"\n🔥 Portfolio #{portfolio_number} ENTRY - {current_date.strftime('%Y-%m-%d')}")
+                    print(f"    📊 Current deviation sum: {current_sum:.1f}%")
+                    print(f"    📈 Rolling window max: {window_max:.1f}% ({window_max_date.strftime('%Y-%m-%d') if window_max_date else 'N/A'})")
+                    print(f"    💰 Invested: ${total_invested:,.2f}")
+                    print(f"    🎯 Assets: {[pos['asset'] for pos in active_positions]}")
+                    print(f"    📉 Deviations: {[f'{pos['entry_deviation']:.1f}%' for pos in active_positions]}")
                     
-                    if len(new_opportunities) > 0 and current_capital > 1000:
-                        # Enter new portfolio
-                        active_positions = self.create_positions(new_opportunities, current_capital)
-                        portfolio_number += 1
-                        portfolio_entry_date = current_date
-                        total_new_invested = sum(pos['investment'] for pos in active_positions)
-                        current_capital -= total_new_invested
-                        
-                        print(f"\n🔥 Portfolio #{portfolio_number} - {current_date.strftime('%Y-%m-%d')}")
-                        print(f"    💰 Invested: ${total_new_invested:,.2f}")
-                        print(f"    🎯 Assets: {[pos['asset'] for pos in active_positions]}")
-                        print(f"    📊 Deviations: {[f'{pos['entry_deviation']:.1f}%' for pos in active_positions]}")
-                        
-                        # Recalculate portfolio value for tracking
-                        asset_list = [pos['asset'] for pos in active_positions]
-                        current_prices = self.get_current_prices(data, asset_list, current_date)
-                        portfolio_value = self.calculate_portfolio_value(active_positions, current_prices)
-                    else:
-                        # No new opportunities or insufficient capital
-                        active_positions = []
-                        portfolio_value = 0
-            else:
-                portfolio_value = 0
+                    # Recalculate portfolio value for tracking
+                    asset_list = [pos['asset'] for pos in active_positions]
+                    current_prices = self.get_current_prices(data, asset_list, current_date)
+                    portfolio_value = self.calculate_portfolio_value(active_positions, current_prices)
+                else:
+                    active_positions = []
+                    portfolio_value = 0
             
             # Daily tracking
             total_account_value = current_capital + portfolio_value
@@ -347,14 +321,18 @@ class UnderperformanceBacktester:
                 'total_return_pct': ((total_account_value / self.initial_capital) - 1) * 100,
                 'active_positions': len(active_positions),
                 'completed_portfolios': len(completed_portfolios),
-                'portfolio_number': portfolio_number if len(active_positions) > 0 else 0
+                'portfolio_number': portfolio_number if len(active_positions) > 0 else 0,
+                'current_deviation_sum': current_sum,
+                'rolling_window_max': window_max,
+                'new_entry_signal': new_entry_signal
             })
             
             # Progress updates (monthly)
             if current_date.day == 1:  # First day of month
                 total_return = ((total_account_value / self.initial_capital) - 1) * 100
                 print(f"📅 {current_date.strftime('%Y-%m')}: ${total_account_value:,.0f} ({total_return:+.1f}%) | "
-                      f"Completed: {len(completed_portfolios)} | Active: {len(active_positions)} | Rebalances: {len(rebalance_events)}")
+                      f"Portfolio: {portfolio_number if len(active_positions) > 0 else 0} | "
+                      f"Entries: {len(entry_events)} | Current Sum: {current_sum:.1f}%")
         
         # Final calculations
         final_value = current_capital
@@ -368,7 +346,8 @@ class UnderperformanceBacktester:
         return {
             'completed_portfolios': completed_portfolios,
             'daily_tracking': daily_tracking,
-            'rebalance_events': rebalance_events,
+            'entry_events': entry_events,
+            'daily_deviation_sums': daily_deviation_sums,
             'final_value': final_value,
             'total_return': ((final_value / self.initial_capital) - 1) * 100,
             'active_positions': active_positions
@@ -379,7 +358,7 @@ class UnderperformanceBacktester:
         if results is None:
             return
         
-        print(f"\n📊 BACKTEST RESULTS")
+        print(f"\n📊 ROLLING WINDOW BACKTEST RESULTS")
         print("="*60)
         
         # Overall performance
@@ -398,35 +377,37 @@ class UnderperformanceBacktester:
         
         # Portfolio statistics
         portfolios = results['completed_portfolios']
+        entry_events = results['entry_events']
+        
         if len(portfolios) > 0:
-            profit_exits = [p for p in portfolios if 'PROFIT_TARGET' in p.get('exit_reason', '')]
-            rebalance_exits = [p for p in portfolios if 'REBALANCE' in p.get('exit_reason', '')]
-            
             returns = [p['return_pct'] for p in portfolios]
             hold_times = [p['hold_days'] for p in portfolios]
             
             print(f"\n📈 PORTFOLIO STATS:")
             print(f"   Completed: {len(portfolios)}")
-            print(f"   Profit Target Exits: {len(profit_exits)}")
-            print(f"   Rebalance Exits: {len(rebalance_exits)}")
+            print(f"   Total Entries: {len(entry_events)}")
             print(f"   Avg Return: {np.mean(returns):.1f}%")
+            print(f"   Best Return: {max(returns):.1f}%")
+            print(f"   Worst Return: {min(returns):.1f}%")
             print(f"   Avg Hold Time: {np.mean(hold_times):.0f} days")
             print(f"   Min Hold Time: {min(hold_times):.0f} days")
             print(f"   Max Hold Time: {max(hold_times):.0f} days")
         
-        # Rebalance statistics
-        rebalances = results['rebalance_events']
-        if len(rebalances) > 0:
-            print(f"\n🔄 REBALANCE STATS:")
-            print(f"   Total Rebalances: {len(rebalances)}")
-            avg_deviation = np.mean([r['total_deviation'] for r in rebalances])
-            print(f"   Avg Trigger Deviation: {avg_deviation:.1f}%")
+        # Entry signal statistics
+        if len(entry_events) > 0:
+            deviation_sums = [e['deviation_sum'] for e in entry_events]
+            print(f"\n🔍 ENTRY SIGNAL STATS:")
+            print(f"   Total Entries: {len(entry_events)}")
+            print(f"   Avg Entry Deviation Sum: {np.mean(deviation_sums):.1f}%")
+            print(f"   Min Entry Deviation Sum: {min(deviation_sums):.1f}%")
+            print(f"   Max Entry Deviation Sum: {max(deviation_sums):.1f}%")
             
-            print(f"\n🎯 FIRST 3 REBALANCES:")
-            for i, r in enumerate(rebalances[:3]):
-                print(f"   #{i+1}: {r['date'].strftime('%Y-%m-%d')} | "
-                      f"Deviation: {r['total_deviation']:.1f}% | "
-                      f"Days since last: {r['days_since_last']}")
+            print(f"\n🎯 FIRST 5 ENTRIES:")
+            for i, e in enumerate(entry_events[:5]):
+                print(f"   #{i+1}: {e['date'].strftime('%Y-%m-%d')} | "
+                      f"Sum: {e['deviation_sum']:.1f}% | "
+                      f"Assets: {e['assets']} | "
+                      f"Window Max: {e['rolling_window_max']:.1f}%")
         
         return results
     
@@ -440,7 +421,7 @@ class UnderperformanceBacktester:
         # Save daily tracking
         if len(results['daily_tracking']) > 0:
             daily_df = pd.DataFrame(results['daily_tracking'])
-            daily_file = os.path.join(results_dir, "UNDERPERFORMANCE_BACKTEST_DAILY.csv")
+            daily_file = os.path.join(results_dir, "ROLLING_WINDOW_BACKTEST_DAILY.csv")
             daily_df.to_csv(daily_file, index=False)
             print(f"✅ Daily values: {daily_file}")
         
@@ -450,32 +431,48 @@ class UnderperformanceBacktester:
             # Convert lists to strings for CSV
             portfolios_df['assets'] = portfolios_df['assets'].astype(str)
             portfolios_df['entry_deviations'] = portfolios_df['entry_deviations'].astype(str)
-            portfolio_file = os.path.join(results_dir, "UNDERPERFORMANCE_BACKTEST_PORTFOLIOS.csv")
+            portfolio_file = os.path.join(results_dir, "ROLLING_WINDOW_BACKTEST_PORTFOLIOS.csv")
             portfolios_df.to_csv(portfolio_file, index=False)
             print(f"✅ Portfolios: {portfolio_file}")
         
-        # Save rebalance events
-        if len(results['rebalance_events']) > 0:
-            rebalance_df = pd.DataFrame(results['rebalance_events'])
+        # Save entry events
+        if len(results['entry_events']) > 0:
+            entries_df = pd.DataFrame(results['entry_events'])
             # Convert lists to strings for CSV
-            rebalance_df['old_assets'] = rebalance_df['old_assets'].astype(str)
-            rebalance_df['new_assets'] = rebalance_df['new_assets'].astype(str)
-            rebalance_file = os.path.join(results_dir, "UNDERPERFORMANCE_BACKTEST_REBALANCES.csv")
-            rebalance_df.to_csv(rebalance_file, index=False)
-            print(f"✅ Rebalances: {rebalance_file}")
+            entries_df['assets'] = entries_df['assets'].astype(str)
+            entries_df['deviations'] = entries_df['deviations'].astype(str)
+            entries_file = os.path.join(results_dir, "ROLLING_WINDOW_BACKTEST_ENTRIES.csv")
+            entries_df.to_csv(entries_file, index=False)
+            print(f"✅ Entry events: {entries_file}")
+        
+        # Save daily deviation sums
+        deviation_data = []
+        for date, info in results['daily_deviation_sums'].items():
+            assets = [opp['asset'] for opp in info['opportunities']]
+            deviations = [opp['deviation'] for opp in info['opportunities']]
+            deviation_data.append({
+                'date': date,
+                'deviation_sum': info['sum'],
+                'assets': str(assets),
+                'deviations': str(deviations)
+            })
+        
+        if len(deviation_data) > 0:
+            deviation_df = pd.DataFrame(deviation_data)
+            deviation_file = os.path.join(results_dir, "ROLLING_WINDOW_DAILY_DEVIATIONS.csv")
+            deviation_df.to_csv(deviation_file, index=False)
+            print(f"✅ Daily deviations: {deviation_file}")
 
 
-def run_backtest():
-    """Run the underperformance backtest"""
-    print("IWLS UNDERPERFORMANCE BACKTEST")
+def run_rolling_window_backtest():
+    """Run the rolling window backtest"""
+    print("IWLS ROLLING WINDOW BACKTEST")
     print("="*50)
     
-    backtester = UnderperformanceBacktester(
+    backtester = RollingWindowBacktester(
         initial_capital=10000,
-        num_positions=1,
-        profit_target=100.0,  # 50% profit target
-        rebalance_threshold=65.0,  # Rebalance if total deviation > 250%
-        rebalance_wait_days=300  # Wait 180 days between rebalances
+        num_positions=3,  # 3 most underperforming stocks
+        rolling_window_days=365  # 365 day rolling window
     )
     
     # Run backtest
@@ -485,10 +482,10 @@ def run_backtest():
     backtester.analyze_results(results)
     backtester.save_results(results)
     
-    print(f"\n✨ BACKTEST COMPLETE!")
+    print(f"\n✨ ROLLING WINDOW BACKTEST COMPLETE!")
     
     return results
 
 
 if __name__ == "__main__":
-    backtest_results = run_backtest()
+    backtest_results = run_rolling_window_backtest()

@@ -1,0 +1,1004 @@
+🚀 STARTING BACKTEST
+======================================================================
+💰 Initial capital: $10,000.00
+🎯 Strategy: Buy 3 worst performers, exit at +20.0%
+🔄 Rebalance: If top 5 deviations sum > 180.0% and 200+ days passed
+📅 Backtest period: 1991-12-06 to 2025-09-02
+📊 Trading days: 8,803
+
+🔥 Portfolio #1 - 1991-12-06
+    💰 Invested: $10,000.00
+    🎯 Target Exit: $12,000.00 (+20.0%)
+    📊 Assets: ['ORCL', 'AXP', 'CAT']
+    📉 Deviations: ['-34.1%', '-26.0%', '-24.7%']
+
+📤 Portfolio #1 EXIT - 1991-12-27
+    📊 Reason: PROFIT_TARGET (+21.4%)
+    📈 Return: +21.4% in 21 days
+    💰 Value: $12,143.34 -> Total: $12,143.34
+
+🔥 Portfolio #2 - 1991-12-27
+    💰 Invested: $12,143.34
+    🎯 Assets: ['CAT', 'DHR', 'AXP']
+    📊 Deviations: ['-15.9%', '-13.4%', '-12.1%']
+📅 1992-01: $12,533 (+25.3%) | Completed: 1 | Active: 3 | Rebalances: 0
+📅 1992-04: $13,344 (+33.4%) | Completed: 1 | Active: 3 | Rebalances: 0
+📅 1992-05: $14,158 (+41.6%) | Completed: 1 | Active: 3 | Rebalances: 0
+
+📤 Portfolio #2 EXIT - 1992-05-11
+    📊 Reason: PROFIT_TARGET (+20.3%)
+    📈 Return: +20.3% in 136 days
+    💰 Value: $14,610.48 -> Total: $14,610.48
+
+🔥 Portfolio #3 - 1992-05-11
+    💰 Invested: $14,610.48
+    🎯 Assets: ['ADBE', 'LLY', 'BA']
+    📊 Deviations: ['-27.7%', '-24.6%', '-23.3%']
+📅 1992-06: $14,379 (+43.8%) | Completed: 2 | Active: 3 | Rebalances: 0
+📅 1992-07: $13,925 (+39.2%) | Completed: 2 | Active: 3 | Rebalances: 0
+📅 1992-09: $12,496 (+25.0%) | Completed: 2 | Active: 3 | Rebalances: 0
+📅 1992-10: $11,458 (+14.6%) | Completed: 2 | Active: 3 | Rebalances: 0
+📅 1992-12: $11,874 (+18.7%) | Completed: 2 | Active: 3 | Rebalances: 0
+📅 1993-01: $12,852 (+28.5%) | Completed: 2 | Active: 3 | Rebalances: 0
+📅 1993-02: $12,280 (+22.8%) | Completed: 2 | Active: 3 | Rebalances: 0
+📅 1993-03: $12,672 (+26.7%) | Completed: 2 | Active: 3 | Rebalances: 0
+📅 1993-04: $12,170 (+21.7%) | Completed: 2 | Active: 3 | Rebalances: 0
+📅 1993-06: $15,431 (+54.3%) | Completed: 2 | Active: 3 | Rebalances: 0
+📅 1993-07: $13,646 (+36.5%) | Completed: 2 | Active: 3 | Rebalances: 0
+
+📤 Portfolio #3 EXIT - 1993-07-05
+    📊 Reason: REBALANCE (deviation sum: 181.8%)
+    🔄 Days since last rebalance: 577
+    📉 Current worst 5 deviation sum: 181.8%
+    📈 Return: -8.3% in 420 days
+    💰 Value: $13,391.79 -> Total: $13,391.79
+
+🔥 Portfolio #4 - 1993-07-05
+    💰 Invested: $13,391.79
+    🎯 Assets: ['COST', 'AMGN', 'AAPL']
+    📊 Deviations: ['-66.3%', '-65.7%', '-49.8%']
+📅 1993-09: $13,688 (+36.9%) | Completed: 3 | Active: 3 | Rebalances: 1
+📅 1993-10: $15,158 (+51.6%) | Completed: 3 | Active: 3 | Rebalances: 1
+
+📤 Portfolio #4 EXIT - 1993-10-29
+    📊 Reason: PROFIT_TARGET (+20.8%)
+    📈 Return: +20.8% in 116 days
+    💰 Value: $16,177.75 -> Total: $16,177.75
+
+🔥 Portfolio #5 - 1993-10-29
+    💰 Invested: $16,177.75
+    🎯 Assets: ['AMGN', 'COST', 'NKE']
+    📊 Deviations: ['-58.0%', '-57.8%', '-54.3%']
+📅 1993-11: $16,253 (+62.5%) | Completed: 4 | Active: 3 | Rebalances: 1
+📅 1993-12: $15,810 (+58.1%) | Completed: 4 | Active: 3 | Rebalances: 1
+📅 1994-02: $15,421 (+54.2%) | Completed: 4 | Active: 3 | Rebalances: 1
+📅 1994-03: $16,280 (+62.8%) | Completed: 4 | Active: 3 | Rebalances: 1
+📅 1994-04: $14,977 (+49.8%) | Completed: 4 | Active: 3 | Rebalances: 1
+📅 1994-06: $15,987 (+59.9%) | Completed: 4 | Active: 3 | Rebalances: 1
+📅 1994-07: $16,201 (+62.0%) | Completed: 4 | Active: 3 | Rebalances: 1
+📅 1994-08: $17,367 (+73.7%) | Completed: 4 | Active: 3 | Rebalances: 1
+📅 1994-09: $17,808 (+78.1%) | Completed: 4 | Active: 3 | Rebalances: 1
+📅 1994-11: $17,740 (+77.4%) | Completed: 4 | Active: 3 | Rebalances: 1
+📅 1994-12: $17,305 (+73.0%) | Completed: 4 | Active: 3 | Rebalances: 1
+
+📤 Portfolio #5 EXIT - 1995-01-30
+    📊 Reason: PROFIT_TARGET (+20.6%)
+    📈 Return: +20.6% in 458 days
+    💰 Value: $19,517.21 -> Total: $19,517.21
+
+🔥 Portfolio #6 - 1995-01-30
+    💰 Invested: $19,517.21
+    🎯 Assets: ['CSCO', 'WM', 'UNH']
+    📊 Deviations: ['-47.5%', '-42.6%', '-37.4%']
+📅 1995-02: $19,048 (+90.5%) | Completed: 5 | Active: 3 | Rebalances: 1
+📅 1995-03: $18,213 (+82.1%) | Completed: 5 | Active: 3 | Rebalances: 1
+📅 1995-05: $21,866 (+118.7%) | Completed: 5 | Active: 3 | Rebalances: 1
+📅 1995-06: $22,466 (+124.7%) | Completed: 5 | Active: 3 | Rebalances: 1
+
+📤 Portfolio #6 EXIT - 1995-06-09
+    📊 Reason: PROFIT_TARGET (+20.6%)
+    📈 Return: +20.6% in 130 days
+    💰 Value: $23,529.75 -> Total: $23,529.75
+
+🔥 Portfolio #7 - 1995-06-09
+    💰 Invested: $23,529.75
+    🎯 Assets: ['UNH', 'HD', 'CSCO']
+    📊 Deviations: ['-51.7%', '-37.8%', '-33.2%']
+📅 1995-08: $25,263 (+152.6%) | Completed: 6 | Active: 3 | Rebalances: 1
+📅 1995-09: $27,036 (+170.4%) | Completed: 6 | Active: 3 | Rebalances: 1
+
+📤 Portfolio #7 EXIT - 1995-10-09
+    📊 Reason: PROFIT_TARGET (+20.3%)
+    📈 Return: +20.3% in 122 days
+    💰 Value: $28,314.72 -> Total: $28,314.72
+
+🔥 Portfolio #8 - 1995-10-09
+    💰 Invested: $28,314.72
+    🎯 Assets: ['UNH', 'LOW', 'HD']
+    📊 Deviations: ['-42.5%', '-39.3%', '-36.7%']
+📅 1995-11: $32,492 (+224.9%) | Completed: 7 | Active: 3 | Rebalances: 1
+
+📤 Portfolio #8 EXIT - 1995-11-28
+    📊 Reason: PROFIT_TARGET (+20.6%)
+    📈 Return: +20.6% in 50 days
+    💰 Value: $34,160.29 -> Total: $34,160.29
+
+🔥 Portfolio #9 - 1995-11-28
+    💰 Invested: $34,160.29
+    🎯 Assets: ['LOW', 'UNH', 'MSI']
+    📊 Deviations: ['-29.1%', '-25.7%', '-24.3%']
+📅 1995-12: $34,065 (+240.6%) | Completed: 8 | Active: 3 | Rebalances: 1
+📅 1996-01: $30,118 (+201.2%) | Completed: 8 | Active: 3 | Rebalances: 1
+📅 1996-02: $33,642 (+236.4%) | Completed: 8 | Active: 3 | Rebalances: 1
+📅 1996-03: $34,140 (+241.4%) | Completed: 8 | Active: 3 | Rebalances: 1
+📅 1996-04: $32,348 (+223.5%) | Completed: 8 | Active: 3 | Rebalances: 1
+📅 1996-05: $33,404 (+234.0%) | Completed: 8 | Active: 3 | Rebalances: 1
+📅 1996-07: $28,234 (+182.3%) | Completed: 8 | Active: 3 | Rebalances: 1
+
+📤 Portfolio #9 EXIT - 1996-07-04
+    📊 Reason: REBALANCE (deviation sum: 180.8%)
+    🔄 Days since last rebalance: 1095
+    📉 Current worst 5 deviation sum: 180.8%
+    📈 Return: -17.2% in 219 days
+    💰 Value: $28,282.23 -> Total: $28,282.23
+
+🔥 Portfolio #10 - 1996-07-04
+    💰 Invested: $28,282.23
+    🎯 Assets: ['MU', 'AMAT', 'UNH']
+    📊 Deviations: ['-65.5%', '-60.1%', '-55.2%']
+📅 1996-08: $31,581 (+215.8%) | Completed: 9 | Active: 3 | Rebalances: 2
+
+📤 Portfolio #10 EXIT - 1996-09-06
+    📊 Reason: PROFIT_TARGET (+20.4%)
+    📈 Return: +20.4% in 64 days
+    💰 Value: $34,043.97 -> Total: $34,043.97
+
+🔥 Portfolio #11 - 1996-09-06
+    💰 Invested: $34,043.97
+    🎯 Assets: ['AMAT', 'MU', 'MSI']
+    📊 Deviations: ['-59.9%', '-56.1%', '-45.3%']
+📅 1996-10: $37,001 (+270.0%) | Completed: 10 | Active: 3 | Rebalances: 2
+📅 1996-11: $38,347 (+283.5%) | Completed: 10 | Active: 3 | Rebalances: 2
+
+📤 Portfolio #11 EXIT - 1996-11-07
+    📊 Reason: PROFIT_TARGET (+21.2%)
+    📈 Return: +21.2% in 62 days
+    💰 Value: $41,266.75 -> Total: $41,266.75
+
+🔥 Portfolio #12 - 1996-11-07
+    💰 Invested: $41,266.75
+    🎯 Assets: ['MU', 'AMAT', 'MSI']
+    📊 Deviations: ['-49.5%', '-45.7%', '-42.3%']
+📅 1997-01: $47,192 (+371.9%) | Completed: 11 | Active: 3 | Rebalances: 2
+
+📤 Portfolio #12 EXIT - 1997-01-16
+    📊 Reason: PROFIT_TARGET (+20.7%)
+    📈 Return: +20.7% in 70 days
+    💰 Value: $49,814.74 -> Total: $49,814.74
+
+🔥 Portfolio #13 - 1997-01-16
+    💰 Invested: $49,814.74
+    🎯 Assets: ['MU', 'INTU', 'LOW']
+    📊 Deviations: ['-49.1%', '-36.4%', '-33.1%']
+📅 1997-04: $49,704 (+397.0%) | Completed: 12 | Active: 3 | Rebalances: 2
+📅 1997-05: $51,807 (+418.1%) | Completed: 12 | Active: 3 | Rebalances: 2
+📅 1997-07: $53,531 (+435.3%) | Completed: 12 | Active: 3 | Rebalances: 2
+
+📤 Portfolio #13 EXIT - 1997-07-24
+    📊 Reason: PROFIT_TARGET (+20.8%)
+    📈 Return: +20.8% in 189 days
+    💰 Value: $60,182.08 -> Total: $60,182.08
+
+🔥 Portfolio #14 - 1997-07-24
+    💰 Invested: $60,182.08
+    🎯 Assets: ['INTU', 'LOW', 'QCOM']
+    📊 Deviations: ['-37.7%', '-26.3%', '-25.5%']
+📅 1997-08: $57,866 (+478.7%) | Completed: 13 | Active: 3 | Rebalances: 2
+📅 1997-09: $62,366 (+523.7%) | Completed: 13 | Active: 3 | Rebalances: 2
+
+📤 Portfolio #14 EXIT - 1997-09-22
+    📊 Reason: PROFIT_TARGET (+21.0%)
+    📈 Return: +21.0% in 60 days
+    💰 Value: $72,811.81 -> Total: $72,811.81
+
+🔥 Portfolio #15 - 1997-09-22
+    💰 Invested: $72,811.81
+    🎯 Assets: ['MU', 'AMGN', 'INTU']
+    📊 Deviations: ['-49.9%', '-28.0%', '-23.2%']
+📅 1997-10: $74,359 (+643.6%) | Completed: 14 | Active: 3 | Rebalances: 2
+📅 1997-12: $68,855 (+588.6%) | Completed: 14 | Active: 3 | Rebalances: 2
+📅 1998-01: $73,339 (+633.4%) | Completed: 14 | Active: 3 | Rebalances: 2
+
+📤 Portfolio #15 EXIT - 1998-01-28
+    📊 Reason: PROFIT_TARGET (+21.1%)
+    📈 Return: +21.1% in 128 days
+    💰 Value: $88,188.05 -> Total: $88,188.05
+
+🔥 Portfolio #16 - 1998-01-28
+    💰 Invested: $88,188.05
+    🎯 Assets: ['ORCL', 'MU', 'NKE']
+    📊 Deviations: ['-43.1%', '-41.3%', '-33.7%']
+📅 1998-04: $84,351 (+743.5%) | Completed: 15 | Active: 3 | Rebalances: 2
+📅 1998-05: $84,833 (+748.3%) | Completed: 15 | Active: 3 | Rebalances: 2
+📅 1998-06: $76,646 (+666.5%) | Completed: 15 | Active: 3 | Rebalances: 2
+📅 1998-07: $88,981 (+789.8%) | Completed: 15 | Active: 3 | Rebalances: 2
+📅 1998-09: $76,564 (+665.6%) | Completed: 15 | Active: 3 | Rebalances: 2
+📅 1998-10: $81,674 (+716.7%) | Completed: 15 | Active: 3 | Rebalances: 2
+
+📤 Portfolio #16 EXIT - 1998-11-18
+    📊 Reason: PROFIT_TARGET (+20.3%)
+    📈 Return: +20.3% in 294 days
+    💰 Value: $106,046.90 -> Total: $106,046.90
+
+🔥 Portfolio #17 - 1998-11-18
+    💰 Invested: $106,046.90
+    🎯 Assets: ['TMO', 'NKE', 'BA']
+    📊 Deviations: ['-62.6%', '-43.3%', '-41.6%']
+📅 1998-12: $96,487 (+864.9%) | Completed: 16 | Active: 3 | Rebalances: 2
+📅 1999-01: $104,865 (+948.7%) | Completed: 16 | Active: 3 | Rebalances: 2
+📅 1999-02: $108,947 (+989.5%) | Completed: 16 | Active: 3 | Rebalances: 2
+📅 1999-03: $112,548 (+1025.5%) | Completed: 16 | Active: 3 | Rebalances: 2
+📅 1999-04: $117,003 (+1070.0%) | Completed: 16 | Active: 3 | Rebalances: 2
+
+📤 Portfolio #17 EXIT - 1999-04-19
+    📊 Reason: PROFIT_TARGET (+20.1%)
+    📈 Return: +20.1% in 152 days
+    💰 Value: $127,311.26 -> Total: $127,311.26
+
+🔥 Portfolio #18 - 1999-04-19
+    💰 Invested: $127,311.26
+    🎯 Assets: ['TMO', 'MCK', 'BA']
+    📊 Deviations: ['-64.6%', '-53.9%', '-36.6%']
+📅 1999-06: $138,808 (+1288.1%) | Completed: 17 | Active: 3 | Rebalances: 2
+📅 1999-07: $137,580 (+1275.8%) | Completed: 17 | Active: 3 | Rebalances: 2
+
+📤 Portfolio #18 EXIT - 1999-07-28
+    📊 Reason: REBALANCE (deviation sum: 180.5%)
+    🔄 Days since last rebalance: 1119
+    📉 Current worst 5 deviation sum: 180.5%
+    📈 Return: +1.9% in 100 days
+    💰 Value: $129,719.64 -> Total: $129,719.64
+
+🔥 Portfolio #19 - 1999-07-28
+    💰 Invested: $129,719.64
+    🎯 Assets: ['WM', 'MCK', 'TMO']
+    📊 Deviations: ['-62.3%', '-60.2%', '-58.0%']
+📅 1999-09: $124,021 (+1140.2%) | Completed: 18 | Active: 3 | Rebalances: 3
+📅 1999-10: $99,154 (+891.5%) | Completed: 18 | Active: 3 | Rebalances: 3
+📅 1999-11: $95,331 (+853.3%) | Completed: 18 | Active: 3 | Rebalances: 3
+📅 1999-12: $95,799 (+858.0%) | Completed: 18 | Active: 3 | Rebalances: 3
+📅 2000-02: $94,917 (+849.2%) | Completed: 18 | Active: 3 | Rebalances: 3
+
+📤 Portfolio #19 EXIT - 2000-02-14
+    📊 Reason: REBALANCE (deviation sum: 220.2%)
+    🔄 Days since last rebalance: 201
+    📉 Current worst 5 deviation sum: 220.2%
+    📈 Return: -26.5% in 201 days
+    💰 Value: $95,363.94 -> Total: $95,363.94
+
+🔥 Portfolio #20 - 2000-02-14
+    💰 Invested: $95,363.94
+    🎯 Assets: ['WM', 'MCK', 'PGR']
+    📊 Deviations: ['-77.2%', '-74.5%', '-68.5%']
+📅 2000-03: $92,024 (+820.2%) | Completed: 19 | Active: 3 | Rebalances: 4
+📅 2000-05: $110,552 (+1005.5%) | Completed: 19 | Active: 3 | Rebalances: 4
+
+📤 Portfolio #20 EXIT - 2000-05-09
+    📊 Reason: PROFIT_TARGET (+20.4%)
+    📈 Return: +20.4% in 85 days
+    💰 Value: $114,830.50 -> Total: $114,830.50
+
+🔥 Portfolio #21 - 2000-05-09
+    💰 Invested: $114,830.50
+    🎯 Assets: ['MCK', 'WM', 'PGR']
+    📊 Deviations: ['-73.9%', '-71.4%', '-52.4%']
+📅 2000-06: $124,743 (+1147.4%) | Completed: 20 | Active: 3 | Rebalances: 4
+📅 2000-08: $131,218 (+1212.2%) | Completed: 20 | Active: 3 | Rebalances: 4
+
+📤 Portfolio #21 EXIT - 2000-09-01
+    📊 Reason: PROFIT_TARGET (+20.6%)
+    📈 Return: +20.6% in 115 days
+    💰 Value: $138,442.27 -> Total: $138,442.27
+
+🔥 Portfolio #22 - 2000-09-01
+    💰 Invested: $138,442.27
+    🎯 Assets: ['BKNG', 'WM', 'PGR']
+    📊 Deviations: ['-64.8%', '-59.1%', '-55.4%']
+📅 2000-09: $138,442 (+1284.4%) | Completed: 21 | Active: 3 | Rebalances: 4
+
+📤 Portfolio #22 EXIT - 2000-09-05
+    📊 Reason: REBALANCE (deviation sum: 180.9%)
+    🔄 Days since last rebalance: 204
+    📉 Current worst 5 deviation sum: 180.9%
+    📈 Return: -1.2% in 4 days
+    💰 Value: $136,738.53 -> Total: $136,738.53
+
+🔥 Portfolio #23 - 2000-09-05
+    💰 Invested: $136,738.53
+    🎯 Assets: ['BKNG', 'WM', 'MSFT']
+    📊 Deviations: ['-65.7%', '-59.2%', '-56.0%']
+📅 2000-11: $112,424 (+1024.2%) | Completed: 22 | Active: 3 | Rebalances: 5
+📅 2000-12: $98,751 (+887.5%) | Completed: 22 | Active: 3 | Rebalances: 5
+📅 2001-01: $105,838 (+958.4%) | Completed: 22 | Active: 3 | Rebalances: 5
+📅 2001-02: $102,578 (+925.8%) | Completed: 22 | Active: 3 | Rebalances: 5
+📅 2001-03: $106,483 (+964.8%) | Completed: 22 | Active: 3 | Rebalances: 5
+
+📤 Portfolio #23 EXIT - 2001-03-26
+    📊 Reason: REBALANCE (deviation sum: 267.6%)
+    🔄 Days since last rebalance: 202
+    📉 Current worst 5 deviation sum: 267.6%
+    📈 Return: -25.2% in 202 days
+    💰 Value: $102,236.56 -> Total: $102,236.56
+
+🔥 Portfolio #24 - 2001-03-26
+    💰 Invested: $102,236.56
+    🎯 Assets: ['BKNG', 'AMZN', 'CSCO']
+    📊 Deviations: ['-94.6%', '-91.2%', '-81.8%']
+
+📤 Portfolio #24 EXIT - 2001-03-29
+    📊 Reason: PROFIT_TARGET (+24.5%)
+    📈 Return: +24.5% in 3 days
+    💰 Value: $127,301.07 -> Total: $127,301.07
+
+🔥 Portfolio #25 - 2001-03-29
+    💰 Invested: $127,301.07
+    🎯 Assets: ['BKNG', 'AMZN', 'CSCO']
+    📊 Deviations: ['-94.0%', '-87.2%', '-78.3%']
+
+📤 Portfolio #25 EXIT - 2001-04-05
+    📊 Reason: PROFIT_TARGET (+20.5%)
+    📈 Return: +20.5% in 7 days
+    💰 Value: $153,446.17 -> Total: $153,446.17
+
+🔥 Portfolio #26 - 2001-04-05
+    💰 Invested: $153,446.17
+    🎯 Assets: ['BKNG', 'AMZN', 'CSCO']
+    📊 Deviations: ['-92.6%', '-83.8%', '-75.0%']
+
+📤 Portfolio #26 EXIT - 2001-04-20
+    📊 Reason: PROFIT_TARGET (+24.6%)
+    📈 Return: +24.6% in 15 days
+    💰 Value: $191,200.70 -> Total: $191,200.70
+
+🔥 Portfolio #27 - 2001-04-20
+    💰 Invested: $191,200.70
+    🎯 Assets: ['BKNG', 'AMZN', 'CSCO']
+    📊 Deviations: ['-87.7%', '-81.7%', '-74.8%']
+📅 2001-05: $174,022 (+1640.2%) | Completed: 26 | Active: 3 | Rebalances: 6
+📅 2001-06: $197,342 (+1873.4%) | Completed: 26 | Active: 3 | Rebalances: 6
+📅 2001-08: $177,653 (+1676.5%) | Completed: 26 | Active: 3 | Rebalances: 6
+📅 2001-10: $130,680 (+1206.8%) | Completed: 26 | Active: 3 | Rebalances: 6
+
+📤 Portfolio #27 EXIT - 2001-10-12
+    📊 Reason: REBALANCE (deviation sum: 244.7%)
+    🔄 Days since last rebalance: 200
+    📉 Current worst 5 deviation sum: 244.7%
+    📈 Return: -30.0% in 175 days
+    💰 Value: $133,924.35 -> Total: $133,924.35
+
+🔥 Portfolio #28 - 2001-10-12
+    💰 Invested: $133,924.35
+    🎯 Assets: ['AMZN', 'BKNG', 'CSCO']
+    📊 Deviations: ['-91.4%', '-77.3%', '-76.0%']
+📅 2001-11: $145,023 (+1350.2%) | Completed: 27 | Active: 3 | Rebalances: 7
+
+📤 Portfolio #28 EXIT - 2001-11-19
+    📊 Reason: PROFIT_TARGET (+22.1%)
+    📈 Return: +22.1% in 38 days
+    💰 Value: $163,486.38 -> Total: $163,486.38
+
+🔥 Portfolio #29 - 2001-11-19
+    💰 Invested: $163,486.38
+    🎯 Assets: ['AMZN', 'BKNG', 'CSCO']
+    📊 Deviations: ['-86.9%', '-71.2%', '-70.4%']
+📅 2002-01: $179,014 (+1690.1%) | Completed: 28 | Active: 3 | Rebalances: 7
+
+📤 Portfolio #29 EXIT - 2002-01-16
+    📊 Reason: PROFIT_TARGET (+20.3%)
+    📈 Return: +20.3% in 58 days
+    💰 Value: $196,659.48 -> Total: $196,659.48
+
+🔥 Portfolio #30 - 2002-01-16
+    💰 Invested: $196,659.48
+    🎯 Assets: ['AMZN', 'CSCO', 'SCHW']
+    📊 Deviations: ['-81.9%', '-70.1%', '-69.6%']
+📅 2002-02: $183,532 (+1735.3%) | Completed: 29 | Active: 3 | Rebalances: 7
+📅 2002-03: $190,412 (+1804.1%) | Completed: 29 | Active: 3 | Rebalances: 7
+📅 2002-04: $170,961 (+1609.6%) | Completed: 29 | Active: 3 | Rebalances: 7
+
+📤 Portfolio #30 EXIT - 2002-04-30
+    📊 Reason: REBALANCE (deviation sum: 211.9%)
+    🔄 Days since last rebalance: 200
+    📉 Current worst 5 deviation sum: 211.9%
+    📈 Return: -5.6% in 104 days
+    💰 Value: $185,728.20 -> Total: $185,728.20
+
+🔥 Portfolio #31 - 2002-04-30
+    💰 Invested: $185,728.20
+    🎯 Assets: ['QCOM', 'CSCO', 'SCHW']
+    📊 Deviations: ['-73.2%', '-69.7%', '-69.0%']
+📅 2002-05: $191,475 (+1814.8%) | Completed: 30 | Active: 3 | Rebalances: 8
+📅 2002-07: $177,433 (+1674.3%) | Completed: 30 | Active: 3 | Rebalances: 8
+📅 2002-08: $164,522 (+1545.2%) | Completed: 30 | Active: 3 | Rebalances: 8
+📅 2002-10: $161,245 (+1512.4%) | Completed: 30 | Active: 3 | Rebalances: 8
+📅 2002-11: $200,480 (+1904.8%) | Completed: 30 | Active: 3 | Rebalances: 8
+
+📤 Portfolio #31 EXIT - 2002-11-18
+    📊 Reason: REBALANCE (deviation sum: 188.2%)
+    🔄 Days since last rebalance: 202
+    📉 Current worst 5 deviation sum: 188.2%
+    📈 Return: +14.8% in 202 days
+    💰 Value: $213,213.71 -> Total: $213,213.71
+
+🔥 Portfolio #32 - 2002-11-18
+    💰 Invested: $213,213.71
+    🎯 Assets: ['NVDA', 'MU', 'QCOM']
+    📊 Deviations: ['-68.5%', '-59.9%', '-59.8%']
+📅 2003-01: $158,016 (+1480.2%) | Completed: 31 | Active: 3 | Rebalances: 9
+📅 2003-04: $148,821 (+1388.2%) | Completed: 31 | Active: 3 | Rebalances: 9
+📅 2003-05: $186,459 (+1764.6%) | Completed: 31 | Active: 3 | Rebalances: 9
+📅 2003-07: $227,109 (+2171.1%) | Completed: 31 | Active: 3 | Rebalances: 9
+📅 2003-08: $188,177 (+1781.8%) | Completed: 31 | Active: 3 | Rebalances: 9
+📅 2003-09: $215,473 (+2054.7%) | Completed: 31 | Active: 3 | Rebalances: 9
+📅 2003-10: $202,547 (+1925.5%) | Completed: 31 | Active: 3 | Rebalances: 9
+📅 2003-12: $228,971 (+2189.7%) | Completed: 31 | Active: 3 | Rebalances: 9
+
+📤 Portfolio #32 EXIT - 2003-12-24
+    📊 Reason: PROFIT_TARGET (+22.2%)
+    📈 Return: +22.2% in 401 days
+    💰 Value: $260,525.69 -> Total: $260,525.69
+
+🔥 Portfolio #33 - 2003-12-24
+    💰 Invested: $260,525.69
+    🎯 Assets: ['NVDA', 'JNJ', 'AMGN']
+    📊 Deviations: ['-24.2%', '-12.5%', '-11.8%']
+📅 2004-01: $263,685 (+2536.8%) | Completed: 32 | Active: 3 | Rebalances: 9
+📅 2004-03: $246,558 (+2365.6%) | Completed: 32 | Active: 3 | Rebalances: 9
+📅 2004-04: $261,202 (+2512.0%) | Completed: 32 | Active: 3 | Rebalances: 9
+📅 2004-06: $246,191 (+2361.9%) | Completed: 32 | Active: 3 | Rebalances: 9
+📅 2004-07: $227,932 (+2179.3%) | Completed: 32 | Active: 3 | Rebalances: 9
+📅 2004-09: $228,511 (+2185.1%) | Completed: 32 | Active: 3 | Rebalances: 9
+📅 2004-10: $220,871 (+2108.7%) | Completed: 32 | Active: 3 | Rebalances: 9
+📅 2004-11: $251,325 (+2413.2%) | Completed: 32 | Active: 3 | Rebalances: 9
+📅 2004-12: $275,815 (+2658.1%) | Completed: 32 | Active: 3 | Rebalances: 9
+📅 2005-02: $295,371 (+2853.7%) | Completed: 32 | Active: 3 | Rebalances: 9
+📅 2005-03: $286,631 (+2766.3%) | Completed: 32 | Active: 3 | Rebalances: 9
+📅 2005-04: $278,098 (+2681.0%) | Completed: 32 | Active: 3 | Rebalances: 9
+📅 2005-06: $295,320 (+2853.2%) | Completed: 32 | Active: 3 | Rebalances: 9
+📅 2005-07: $304,950 (+2949.5%) | Completed: 32 | Active: 3 | Rebalances: 9
+
+📤 Portfolio #33 EXIT - 2005-07-11
+    📊 Reason: PROFIT_TARGET (+20.7%)
+    📈 Return: +20.7% in 565 days
+    💰 Value: $314,444.78 -> Total: $314,444.78
+
+🔥 Portfolio #34 - 2005-07-11
+    💰 Invested: $314,444.78
+    🎯 Assets: ['BSX', 'MMM', 'SNPS']
+    📊 Deviations: ['-37.6%', '-16.1%', '-15.3%']
+📅 2005-08: $306,375 (+2963.7%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2005-09: $303,923 (+2939.2%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2005-11: $314,208 (+3042.1%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2005-12: $325,091 (+3150.9%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2006-02: $318,053 (+3080.5%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2006-03: $314,757 (+3047.6%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2006-05: $318,544 (+3085.4%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2006-06: $298,451 (+2884.5%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2006-08: $260,911 (+2509.1%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2006-09: $276,188 (+2661.9%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2006-11: $304,862 (+2948.6%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2006-12: $325,894 (+3158.9%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2007-01: $336,136 (+3261.4%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2007-02: $322,518 (+3125.2%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2007-03: $314,398 (+3044.0%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2007-05: $343,795 (+3338.0%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2007-06: $341,269 (+3312.7%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2007-08: $312,649 (+3026.5%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2007-10: $354,681 (+3446.8%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2007-11: $300,994 (+2909.9%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2008-01: $287,904 (+2779.0%) | Completed: 33 | Active: 3 | Rebalances: 9
+📅 2008-02: $292,413 (+2824.1%) | Completed: 33 | Active: 3 | Rebalances: 9
+
+📤 Portfolio #34 EXIT - 2008-02-25
+    📊 Reason: REBALANCE (deviation sum: 180.2%)
+    🔄 Days since last rebalance: 1925
+    📉 Current worst 5 deviation sum: 180.2%
+    📈 Return: -9.5% in 959 days
+    💰 Value: $284,694.40 -> Total: $284,694.40
+
+🔥 Portfolio #35 - 2008-02-25
+    💰 Invested: $284,694.40
+    🎯 Assets: ['SBUX', 'C', 'MSI']
+    📊 Deviations: ['-61.8%', '-60.1%', '-58.4%']
+📅 2008-04: $292,290 (+2822.9%) | Completed: 34 | Active: 3 | Rebalances: 10
+📅 2008-05: $293,941 (+2839.4%) | Completed: 34 | Active: 3 | Rebalances: 10
+📅 2008-07: $223,141 (+2131.4%) | Completed: 34 | Active: 3 | Rebalances: 10
+📅 2008-08: $274,304 (+2643.0%) | Completed: 34 | Active: 3 | Rebalances: 10
+📅 2008-09: $245,152 (+2351.5%) | Completed: 34 | Active: 3 | Rebalances: 10
+
+📤 Portfolio #35 EXIT - 2008-09-12
+    📊 Reason: REBALANCE (deviation sum: 189.2%)
+    🔄 Days since last rebalance: 200
+    📉 Current worst 5 deviation sum: 189.2%
+    📈 Return: -12.3% in 200 days
+    💰 Value: $249,775.61 -> Total: $249,775.61
+
+🔥 Portfolio #36 - 2008-09-12
+    💰 Invested: $249,775.61
+    🎯 Assets: ['NVDA', 'CME', 'MSI']
+    📊 Deviations: ['-65.5%', '-62.6%', '-61.0%']
+📅 2008-10: $185,918 (+1759.2%) | Completed: 35 | Active: 3 | Rebalances: 11
+📅 2008-12: $151,134 (+1411.3%) | Completed: 35 | Active: 3 | Rebalances: 11
+📅 2009-01: $143,775 (+1337.8%) | Completed: 35 | Active: 3 | Rebalances: 11
+
+📤 Portfolio #36 EXIT - 2009-03-31
+    📊 Reason: REBALANCE (deviation sum: 235.5%)
+    🔄 Days since last rebalance: 200
+    📉 Current worst 5 deviation sum: 235.5%
+    📈 Return: -22.5% in 200 days
+    💰 Value: $193,618.32 -> Total: $193,618.32
+
+🔥 Portfolio #37 - 2009-03-31
+    💰 Invested: $193,618.32
+    🎯 Assets: ['C', 'ISRG', 'BAC']
+    📊 Deviations: ['-86.0%', '-74.8%', '-74.7%']
+📅 2009-04: $199,515 (+1895.1%) | Completed: 36 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #37 EXIT - 2009-04-23
+    📊 Reason: PROFIT_TARGET (+22.7%)
+    📈 Return: +22.7% in 23 days
+    💰 Value: $237,594.61 -> Total: $237,594.61
+
+🔥 Portfolio #38 - 2009-04-23
+    💰 Invested: $237,594.61
+    🎯 Assets: ['C', 'CME', 'BAC']
+    📊 Deviations: ['-83.1%', '-71.4%', '-67.8%']
+📅 2009-05: $244,419 (+2344.2%) | Completed: 37 | Active: 3 | Rebalances: 12
+📅 2009-06: $280,452 (+2704.5%) | Completed: 37 | Active: 3 | Rebalances: 12
+📅 2009-07: $231,030 (+2210.3%) | Completed: 37 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #38 EXIT - 2009-07-27
+    📊 Reason: PROFIT_TARGET (+21.4%)
+    📈 Return: +21.4% in 95 days
+    💰 Value: $288,372.99 -> Total: $288,372.99
+
+🔥 Portfolio #39 - 2009-07-27
+    💰 Invested: $288,372.99
+    🎯 Assets: ['C', 'CME', 'ISRG']
+    📊 Deviations: ['-76.6%', '-57.3%', '-50.8%']
+📅 2009-09: $307,893 (+2978.9%) | Completed: 38 | Active: 3 | Rebalances: 12
+📅 2009-10: $324,192 (+3141.9%) | Completed: 38 | Active: 3 | Rebalances: 12
+📅 2009-12: $329,382 (+3193.8%) | Completed: 38 | Active: 3 | Rebalances: 12
+📅 2010-01: $329,348 (+3193.5%) | Completed: 38 | Active: 3 | Rebalances: 12
+📅 2010-02: $315,853 (+3058.5%) | Completed: 38 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #39 EXIT - 2010-02-24
+    📊 Reason: PROFIT_TARGET (+20.2%)
+    📈 Return: +20.2% in 212 days
+    💰 Value: $346,706.92 -> Total: $346,706.92
+
+🔥 Portfolio #40 - 2010-02-24
+    💰 Invested: $346,706.92
+    🎯 Assets: ['TMUS', 'C', 'XOM']
+    📊 Deviations: ['-45.6%', '-40.4%', '-22.2%']
+📅 2010-03: $359,192 (+3491.9%) | Completed: 39 | Active: 3 | Rebalances: 12
+📅 2010-04: $393,099 (+3831.0%) | Completed: 39 | Active: 3 | Rebalances: 12
+📅 2010-06: $385,507 (+3755.1%) | Completed: 39 | Active: 3 | Rebalances: 12
+📅 2010-07: $385,966 (+3759.7%) | Completed: 39 | Active: 3 | Rebalances: 12
+📅 2010-09: $400,678 (+3906.8%) | Completed: 39 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #40 EXIT - 2010-09-15
+    📊 Reason: PROFIT_TARGET (+20.5%)
+    📈 Return: +20.5% in 203 days
+    💰 Value: $417,838.96 -> Total: $417,838.96
+
+🔥 Portfolio #41 - 2010-09-15
+    💰 Invested: $417,838.96
+    🎯 Assets: ['BLK', 'SCHW', 'MA']
+    📊 Deviations: ['-27.3%', '-27.2%', '-26.1%']
+📅 2010-10: $432,796 (+4228.0%) | Completed: 40 | Active: 3 | Rebalances: 12
+📅 2010-11: $445,172 (+4351.7%) | Completed: 40 | Active: 3 | Rebalances: 12
+📅 2010-12: $469,480 (+4594.8%) | Completed: 40 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #41 EXIT - 2011-01-26
+    📊 Reason: PROFIT_TARGET (+20.5%)
+    📈 Return: +20.5% in 133 days
+    💰 Value: $503,683.01 -> Total: $503,683.01
+
+🔥 Portfolio #42 - 2011-01-26
+    💰 Invested: $503,683.01
+    🎯 Assets: ['MA', 'CSCO', 'MRK']
+    📊 Deviations: ['-24.0%', '-11.7%', '-6.9%']
+📅 2011-02: $490,109 (+4801.1%) | Completed: 41 | Active: 3 | Rebalances: 12
+📅 2011-03: $476,184 (+4661.8%) | Completed: 41 | Active: 3 | Rebalances: 12
+📅 2011-04: $493,270 (+4832.7%) | Completed: 41 | Active: 3 | Rebalances: 12
+📅 2011-06: $481,800 (+4718.0%) | Completed: 41 | Active: 3 | Rebalances: 12
+📅 2011-07: $518,004 (+5080.0%) | Completed: 41 | Active: 3 | Rebalances: 12
+📅 2011-08: $509,816 (+4998.2%) | Completed: 41 | Active: 3 | Rebalances: 12
+📅 2011-09: $520,679 (+5106.8%) | Completed: 41 | Active: 3 | Rebalances: 12
+📅 2011-11: $582,932 (+5729.3%) | Completed: 41 | Active: 3 | Rebalances: 12
+📅 2011-12: $579,542 (+5695.4%) | Completed: 41 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #42 EXIT - 2012-01-19
+    📊 Reason: PROFIT_TARGET (+20.7%)
+    📈 Return: +20.7% in 358 days
+    💰 Value: $608,130.49 -> Total: $608,130.49
+
+🔥 Portfolio #43 - 2012-01-19
+    💰 Invested: $608,130.49
+    🎯 Assets: ['NFLX', 'SCHW', 'AMZN']
+    📊 Deviations: ['-24.9%', '-19.7%', '-19.3%']
+📅 2012-02: $599,289 (+5892.9%) | Completed: 42 | Active: 3 | Rebalances: 12
+📅 2012-03: $617,155 (+6071.5%) | Completed: 42 | Active: 3 | Rebalances: 12
+📅 2012-05: $574,276 (+5642.8%) | Completed: 42 | Active: 3 | Rebalances: 12
+📅 2012-06: $545,066 (+5350.7%) | Completed: 42 | Active: 3 | Rebalances: 12
+📅 2012-08: $563,656 (+5536.6%) | Completed: 42 | Active: 3 | Rebalances: 12
+📅 2012-10: $574,055 (+5640.5%) | Completed: 42 | Active: 3 | Rebalances: 12
+📅 2012-11: $580,204 (+5702.0%) | Completed: 42 | Active: 3 | Rebalances: 12
+📅 2013-01: $701,427 (+6914.3%) | Completed: 42 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #43 EXIT - 2013-01-09
+    📊 Reason: PROFIT_TARGET (+23.1%)
+    📈 Return: +23.1% in 356 days
+    💰 Value: $748,449.14 -> Total: $748,449.14
+
+🔥 Portfolio #44 - 2013-01-09
+    💰 Invested: $748,449.14
+    🎯 Assets: ['NFLX', 'META', 'BKNG']
+    📊 Deviations: ['-25.4%', '-19.6%', '-19.1%']
+📅 2013-02: $870,236 (+8602.4%) | Completed: 43 | Active: 3 | Rebalances: 12
+📅 2013-03: $856,882 (+8468.8%) | Completed: 43 | Active: 3 | Rebalances: 12
+📅 2013-04: $847,493 (+8374.9%) | Completed: 43 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #44 EXIT - 2013-04-15
+    📊 Reason: PROFIT_TARGET (+22.1%)
+    📈 Return: +22.1% in 96 days
+    💰 Value: $913,918.99 -> Total: $913,918.99
+
+🔥 Portfolio #45 - 2013-04-15
+    💰 Invested: $913,918.99
+    🎯 Assets: ['AAPL', 'META', 'BKNG']
+    📊 Deviations: ['-33.3%', '-24.9%', '-21.5%']
+📅 2013-05: $966,683 (+9566.8%) | Completed: 44 | Active: 3 | Rebalances: 12
+📅 2013-07: $1,005,282 (+9952.8%) | Completed: 44 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #45 EXIT - 2013-07-15
+    📊 Reason: PROFIT_TARGET (+20.2%)
+    📈 Return: +20.2% in 91 days
+    💰 Value: $1,098,933.51 -> Total: $1,098,933.51
+
+🔥 Portfolio #46 - 2013-07-15
+    💰 Invested: $1,098,933.51
+    🎯 Assets: ['AAPL', 'ISRG', 'CAT']
+    📊 Deviations: ['-33.7%', '-30.2%', '-15.1%']
+📅 2013-08: $1,148,050 (+11380.5%) | Completed: 45 | Active: 3 | Rebalances: 12
+📅 2013-10: $1,166,985 (+11569.9%) | Completed: 45 | Active: 3 | Rebalances: 12
+📅 2013-11: $1,186,678 (+11766.8%) | Completed: 45 | Active: 3 | Rebalances: 12
+📅 2014-01: $1,257,368 (+12473.7%) | Completed: 45 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #46 EXIT - 2014-03-18
+    📊 Reason: PROFIT_TARGET (+20.3%)
+    📈 Return: +20.3% in 246 days
+    💰 Value: $1,321,586.95 -> Total: $1,321,586.95
+
+🔥 Portfolio #47 - 2014-03-18
+    💰 Invested: $1,321,586.95
+    🎯 Assets: ['AAPL', 'ISRG', 'PM']
+    📊 Deviations: ['-28.2%', '-25.7%', '-24.0%']
+📅 2014-04: $1,303,952 (+12939.5%) | Completed: 46 | Active: 3 | Rebalances: 12
+📅 2014-05: $1,311,654 (+13016.5%) | Completed: 46 | Active: 3 | Rebalances: 12
+📅 2014-07: $1,391,452 (+13814.5%) | Completed: 46 | Active: 3 | Rebalances: 12
+📅 2014-08: $1,464,255 (+14542.6%) | Completed: 46 | Active: 3 | Rebalances: 12
+📅 2014-09: $1,511,421 (+15014.2%) | Completed: 46 | Active: 3 | Rebalances: 12
+📅 2014-10: $1,493,755 (+14837.6%) | Completed: 46 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #47 EXIT - 2014-10-20
+    📊 Reason: PROFIT_TARGET (+20.3%)
+    📈 Return: +20.3% in 216 days
+    💰 Value: $1,589,701.21 -> Total: $1,589,701.21
+
+🔥 Portfolio #48 - 2014-10-20
+    💰 Invested: $1,589,701.21
+    🎯 Assets: ['IBM', 'AMZN', 'SBUX']
+    📊 Deviations: ['-28.2%', '-25.3%', '-22.4%']
+📅 2014-12: $1,617,784 (+16077.8%) | Completed: 47 | Active: 3 | Rebalances: 12
+📅 2015-01: $1,580,715 (+15707.2%) | Completed: 47 | Active: 3 | Rebalances: 12
+📅 2015-04: $1,853,544 (+18435.4%) | Completed: 47 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #48 EXIT - 2015-04-08
+    📊 Reason: PROFIT_TARGET (+20.8%)
+    📈 Return: +20.8% in 170 days
+    💰 Value: $1,920,976.12 -> Total: $1,920,976.12
+
+🔥 Portfolio #49 - 2015-04-08
+    💰 Invested: $1,920,976.12
+    🎯 Assets: ['BKNG', 'AXP', 'MSI']
+    📊 Deviations: ['-25.8%', '-21.5%', '-20.9%']
+📅 2015-05: $1,926,207 (+19162.1%) | Completed: 48 | Active: 3 | Rebalances: 12
+📅 2015-06: $1,888,698 (+18787.0%) | Completed: 48 | Active: 3 | Rebalances: 12
+📅 2015-07: $1,879,688 (+18696.9%) | Completed: 48 | Active: 3 | Rebalances: 12
+📅 2015-09: $2,016,751 (+20067.5%) | Completed: 48 | Active: 3 | Rebalances: 12
+📅 2015-10: $2,071,822 (+20618.2%) | Completed: 48 | Active: 3 | Rebalances: 12
+📅 2015-12: $1,971,638 (+19616.4%) | Completed: 48 | Active: 3 | Rebalances: 12
+📅 2016-01: $1,758,852 (+17488.5%) | Completed: 48 | Active: 3 | Rebalances: 12
+📅 2016-02: $1,648,868 (+16388.7%) | Completed: 48 | Active: 3 | Rebalances: 12
+📅 2016-03: $1,954,928 (+19449.3%) | Completed: 48 | Active: 3 | Rebalances: 12
+📅 2016-04: $2,007,585 (+19975.8%) | Completed: 48 | Active: 3 | Rebalances: 12
+📅 2016-06: $1,935,996 (+19260.0%) | Completed: 48 | Active: 3 | Rebalances: 12
+📅 2016-07: $1,937,169 (+19271.7%) | Completed: 48 | Active: 3 | Rebalances: 12
+📅 2016-08: $2,074,447 (+20644.5%) | Completed: 48 | Active: 3 | Rebalances: 12
+📅 2016-09: $2,098,571 (+20885.7%) | Completed: 48 | Active: 3 | Rebalances: 12
+📅 2016-11: $2,245,272 (+22352.7%) | Completed: 48 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #49 EXIT - 2016-11-28
+    📊 Reason: PROFIT_TARGET (+20.7%)
+    📈 Return: +20.7% in 600 days
+    💰 Value: $2,318,721.54 -> Total: $2,318,721.54
+
+🔥 Portfolio #50 - 2016-11-28
+    💰 Invested: $2,318,721.54
+    🎯 Assets: ['TSLA', 'MCK', 'AMGN']
+    📊 Deviations: ['-54.6%', '-39.5%', '-29.9%']
+📅 2016-12: $2,350,182 (+23401.8%) | Completed: 49 | Active: 3 | Rebalances: 12
+📅 2017-02: $2,764,021 (+27540.2%) | Completed: 49 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #50 EXIT - 2017-02-02
+    📊 Reason: PROFIT_TARGET (+20.0%)
+    📈 Return: +20.0% in 66 days
+    💰 Value: $2,783,541.63 -> Total: $2,783,541.63
+
+🔥 Portfolio #51 - 2017-02-02
+    💰 Invested: $2,783,541.63
+    🎯 Assets: ['MCK', 'TSLA', 'BX']
+    📊 Deviations: ['-39.8%', '-35.9%', '-23.1%']
+📅 2017-03: $2,705,152 (+26951.5%) | Completed: 50 | Active: 3 | Rebalances: 12
+📅 2017-05: $2,947,671 (+29376.7%) | Completed: 50 | Active: 3 | Rebalances: 12
+📅 2017-06: $3,286,862 (+32768.6%) | Completed: 50 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #51 EXIT - 2017-06-08
+    📊 Reason: PROFIT_TARGET (+20.3%)
+    📈 Return: +20.3% in 126 days
+    💰 Value: $3,349,156.65 -> Total: $3,349,156.65
+
+🔥 Portfolio #52 - 2017-06-08
+    💰 Invested: $3,349,156.65
+    🎯 Assets: ['MCK', 'NKE', 'LOW']
+    📊 Deviations: ['-28.6%', '-24.4%', '-21.6%']
+📅 2017-08: $3,361,705 (+33517.0%) | Completed: 51 | Active: 3 | Rebalances: 12
+📅 2017-09: $3,300,468 (+32904.7%) | Completed: 51 | Active: 3 | Rebalances: 12
+📅 2017-11: $3,306,767 (+32967.7%) | Completed: 51 | Active: 3 | Rebalances: 12
+📅 2017-12: $3,709,142 (+36991.4%) | Completed: 51 | Active: 3 | Rebalances: 12
+📅 2018-01: $3,967,085 (+39570.9%) | Completed: 51 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #52 EXIT - 2018-01-04
+    📊 Reason: PROFIT_TARGET (+20.6%)
+    📈 Return: +20.6% in 210 days
+    💰 Value: $4,037,686.56 -> Total: $4,037,686.56
+
+🔥 Portfolio #53 - 2018-01-04
+    💰 Invested: $4,037,686.56
+    🎯 Assets: ['GE', 'BSX', 'PANW']
+    📊 Deviations: ['-44.5%', '-14.9%', '-14.7%']
+📅 2018-02: $3,832,548 (+38225.5%) | Completed: 52 | Active: 3 | Rebalances: 12
+📅 2018-03: $4,122,943 (+41129.4%) | Completed: 52 | Active: 3 | Rebalances: 12
+📅 2018-05: $4,347,995 (+43379.9%) | Completed: 52 | Active: 3 | Rebalances: 12
+📅 2018-06: $4,464,533 (+44545.3%) | Completed: 52 | Active: 3 | Rebalances: 12
+📅 2018-08: $4,466,078 (+44560.8%) | Completed: 52 | Active: 3 | Rebalances: 12
+📅 2018-10: $4,589,728 (+45797.3%) | Completed: 52 | Active: 3 | Rebalances: 12
+📅 2018-11: $3,994,269 (+39842.7%) | Completed: 52 | Active: 3 | Rebalances: 12
+📅 2019-01: $4,157,004 (+41470.0%) | Completed: 52 | Active: 3 | Rebalances: 12
+📅 2019-02: $4,678,169 (+46681.7%) | Completed: 52 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #53 EXIT - 2019-02-14
+    📊 Reason: PROFIT_TARGET (+20.0%)
+    📈 Return: +20.0% in 406 days
+    💰 Value: $4,846,085.46 -> Total: $4,846,085.46
+
+🔥 Portfolio #54 - 2019-02-14
+    💰 Invested: $4,846,085.46
+    🎯 Assets: ['NVDA', 'GE', 'META']
+    📊 Deviations: ['-52.5%', '-40.5%', '-31.4%']
+📅 2019-03: $4,953,259 (+49432.6%) | Completed: 53 | Active: 3 | Rebalances: 12
+📅 2019-04: $5,180,322 (+51703.2%) | Completed: 53 | Active: 3 | Rebalances: 12
+📅 2019-05: $5,166,827 (+51568.3%) | Completed: 53 | Active: 3 | Rebalances: 12
+📅 2019-07: $5,428,681 (+54186.8%) | Completed: 53 | Active: 3 | Rebalances: 12
+📅 2019-08: $4,898,376 (+48883.8%) | Completed: 53 | Active: 3 | Rebalances: 12
+📅 2019-10: $5,175,347 (+51653.5%) | Completed: 53 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #54 EXIT - 2019-10-25
+    📊 Reason: PROFIT_TARGET (+20.6%)
+    📈 Return: +20.6% in 253 days
+    💰 Value: $5,843,531.48 -> Total: $5,843,531.48
+
+🔥 Portfolio #55 - 2019-10-25
+    💰 Invested: $5,843,531.48
+    🎯 Assets: ['NVDA', 'UBER', 'NFLX']
+    📊 Deviations: ['-43.7%', '-32.9%', '-30.3%']
+📅 2019-11: $5,777,972 (+57679.7%) | Completed: 54 | Active: 3 | Rebalances: 12
+📅 2020-01: $6,961,730 (+69517.3%) | Completed: 54 | Active: 3 | Rebalances: 12
+
+📤 Portfolio #55 EXIT - 2020-01-03
+    📊 Reason: PROFIT_TARGET (+20.5%)
+    📈 Return: +20.5% in 70 days
+    💰 Value: $7,040,191.59 -> Total: $7,040,191.59
+
+🔥 Portfolio #56 - 2020-01-03
+    💰 Invested: $7,040,191.59
+    🎯 Assets: ['NVDA', 'AMZN', 'NFLX']
+    📊 Deviations: ['-31.2%', '-23.0%', '-22.5%']
+
+📤 Portfolio #56 EXIT - 2020-03-09
+    📊 Reason: REBALANCE (deviation sum: 180.5%)
+    🔄 Days since last rebalance: 3996
+    📉 Current worst 5 deviation sum: 180.5%
+    📈 Return: -6.6% in 66 days
+    💰 Value: $6,577,318.72 -> Total: $6,577,318.72
+
+🔥 Portfolio #57 - 2020-03-09
+    💰 Invested: $6,577,318.72
+    🎯 Assets: ['BA', 'XOM', 'C']
+    📊 Deviations: ['-77.5%', '-53.9%', '-49.1%']
+
+📤 Portfolio #57 EXIT - 2020-03-13
+    📊 Reason: PROFIT_TARGET (+26.3%)
+    📈 Return: +26.3% in 4 days
+    💰 Value: $8,304,061.43 -> Total: $8,304,061.43
+
+🔥 Portfolio #58 - 2020-03-13
+    💰 Invested: $8,304,061.43
+    🎯 Assets: ['BA', 'XOM', 'C']
+    📊 Deviations: ['-64.9%', '-49.1%', '-42.8%']
+📅 2020-04: $9,179,436 (+91694.4%) | Completed: 57 | Active: 3 | Rebalances: 13
+📅 2020-05: $8,346,729 (+83367.3%) | Completed: 57 | Active: 3 | Rebalances: 13
+
+📤 Portfolio #58 EXIT - 2020-05-21
+    📊 Reason: PROFIT_TARGET (+26.6%)
+    📈 Return: +26.6% in 69 days
+    💰 Value: $10,513,623.59 -> Total: $10,513,623.59
+
+🔥 Portfolio #59 - 2020-05-21
+    💰 Invested: $10,513,623.59
+    🎯 Assets: ['BA', 'WFC', 'XOM']
+    📊 Deviations: ['-58.7%', '-40.2%', '-28.9%']
+📅 2020-06: $10,508,049 (+104980.5%) | Completed: 58 | Active: 3 | Rebalances: 13
+📅 2020-07: $9,641,796 (+96318.0%) | Completed: 58 | Active: 3 | Rebalances: 13
+📅 2020-09: $8,747,347 (+87373.5%) | Completed: 58 | Active: 3 | Rebalances: 13
+📅 2020-10: $8,655,997 (+86460.0%) | Completed: 58 | Active: 3 | Rebalances: 13
+📅 2020-12: $11,157,536 (+111475.4%) | Completed: 58 | Active: 3 | Rebalances: 13
+📅 2021-01: $11,360,850 (+113508.5%) | Completed: 58 | Active: 3 | Rebalances: 13
+📅 2021-02: $11,844,985 (+118349.9%) | Completed: 58 | Active: 3 | Rebalances: 13
+
+📤 Portfolio #59 EXIT - 2021-02-09
+    📊 Reason: PROFIT_TARGET (+20.1%)
+    📈 Return: +20.1% in 264 days
+    💰 Value: $12,624,443.59 -> Total: $12,624,443.59
+
+🔥 Portfolio #60 - 2021-02-09
+    💰 Invested: $12,624,443.59
+    🎯 Assets: ['BA', 'BSX', 'CME']
+    📊 Deviations: ['-47.0%', '-22.5%', '-18.7%']
+📅 2021-03: $14,019,727 (+140097.3%) | Completed: 59 | Active: 3 | Rebalances: 13
+📅 2021-04: $13,743,773 (+137337.7%) | Completed: 59 | Active: 3 | Rebalances: 13
+📅 2021-06: $14,107,385 (+140973.9%) | Completed: 59 | Active: 3 | Rebalances: 13
+📅 2021-07: $13,684,620 (+136746.2%) | Completed: 59 | Active: 3 | Rebalances: 13
+📅 2021-09: $13,080,080 (+130700.8%) | Completed: 59 | Active: 3 | Rebalances: 13
+📅 2021-10: $13,559,529 (+135495.3%) | Completed: 59 | Active: 3 | Rebalances: 13
+📅 2021-11: $13,781,445 (+137714.5%) | Completed: 59 | Active: 3 | Rebalances: 13
+📅 2021-12: $13,309,599 (+132996.0%) | Completed: 59 | Active: 3 | Rebalances: 13
+📅 2022-02: $14,033,918 (+140239.2%) | Completed: 59 | Active: 3 | Rebalances: 13
+📅 2022-03: $13,120,910 (+131109.1%) | Completed: 59 | Active: 3 | Rebalances: 13
+📅 2022-04: $13,551,813 (+135418.1%) | Completed: 59 | Active: 3 | Rebalances: 13
+
+📤 Portfolio #60 EXIT - 2022-04-25
+    📊 Reason: REBALANCE (deviation sum: 180.6%)
+    🔄 Days since last rebalance: 777
+    📉 Current worst 5 deviation sum: 180.6%
+    📈 Return: -5.4% in 440 days
+    💰 Value: $11,939,683.29 -> Total: $11,939,683.29
+
+🔥 Portfolio #61 - 2022-04-25
+    💰 Invested: $11,939,683.29
+    🎯 Assets: ['NFLX', 'DASH', 'ADBE']
+    📊 Deviations: ['-75.0%', '-58.4%', '-47.2%']
+📅 2022-06: $11,253,019 (+112430.2%) | Completed: 60 | Active: 3 | Rebalances: 14
+📅 2022-07: $11,973,970 (+119639.7%) | Completed: 60 | Active: 3 | Rebalances: 14
+📅 2022-08: $14,289,064 (+142790.6%) | Completed: 60 | Active: 3 | Rebalances: 14
+📅 2022-09: $12,148,621 (+121386.2%) | Completed: 60 | Active: 3 | Rebalances: 14
+📅 2022-11: $13,247,196 (+132372.0%) | Completed: 60 | Active: 3 | Rebalances: 14
+📅 2022-12: $13,024,103 (+130141.0%) | Completed: 60 | Active: 3 | Rebalances: 14
+
+📤 Portfolio #61 EXIT - 2022-12-06
+    📊 Reason: REBALANCE (deviation sum: 181.6%)
+    🔄 Days since last rebalance: 225
+    📉 Current worst 5 deviation sum: 181.6%
+    📈 Return: +6.7% in 225 days
+    💰 Value: $12,736,141.55 -> Total: $12,736,141.55
+
+🔥 Portfolio #62 - 2022-12-06
+    💰 Invested: $12,736,141.55
+    🎯 Assets: ['TSLA', 'DASH', 'AMZN']
+    📊 Deviations: ['-63.4%', '-61.5%', '-56.8%']
+
+📤 Portfolio #62 EXIT - 2023-01-20
+    📊 Reason: PROFIT_TARGET (+20.2%)
+    📈 Return: +20.2% in 45 days
+    💰 Value: $15,312,341.68 -> Total: $15,312,341.68
+
+🔥 Portfolio #63 - 2023-01-20
+    💰 Invested: $15,312,341.68
+    🎯 Assets: ['TSLA', 'DASH', 'CRWD']
+    📊 Deviations: ['-53.7%', '-52.2%', '-47.6%']
+📅 2023-02: $15,695,559 (+156855.6%) | Completed: 62 | Active: 3 | Rebalances: 15
+📅 2023-03: $15,337,373 (+153273.7%) | Completed: 62 | Active: 3 | Rebalances: 15
+📅 2023-05: $16,223,562 (+162135.6%) | Completed: 62 | Active: 3 | Rebalances: 15
+
+📤 Portfolio #63 EXIT - 2023-05-19
+    📊 Reason: PROFIT_TARGET (+20.5%)
+    📈 Return: +20.5% in 119 days
+    💰 Value: $18,453,900.25 -> Total: $18,453,900.25
+
+🔥 Portfolio #64 - 2023-05-19
+    💰 Invested: $18,453,900.25
+    🎯 Assets: ['TSLA', 'DIS', 'DHR']
+    📊 Deviations: ['-53.8%', '-34.4%', '-34.2%']
+📅 2023-06: $20,104,933 (+200949.3%) | Completed: 63 | Active: 3 | Rebalances: 15
+📅 2023-08: $19,792,866 (+197828.7%) | Completed: 63 | Active: 3 | Rebalances: 15
+📅 2023-09: $20,414,495 (+204044.9%) | Completed: 63 | Active: 3 | Rebalances: 15
+📅 2023-11: $18,783,649 (+187736.5%) | Completed: 63 | Active: 3 | Rebalances: 15
+📅 2023-12: $20,543,760 (+205337.6%) | Completed: 63 | Active: 3 | Rebalances: 15
+📅 2024-01: $19,367,671 (+193576.7%) | Completed: 63 | Active: 3 | Rebalances: 15
+📅 2024-02: $20,745,785 (+207357.8%) | Completed: 63 | Active: 3 | Rebalances: 15
+📅 2024-03: $19,991,466 (+199814.7%) | Completed: 63 | Active: 3 | Rebalances: 15
+📅 2024-04: $20,001,006 (+199910.1%) | Completed: 63 | Active: 3 | Rebalances: 15
+📅 2024-05: $19,945,584 (+199355.8%) | Completed: 63 | Active: 3 | Rebalances: 15
+📅 2024-07: $21,340,015 (+213300.1%) | Completed: 63 | Active: 3 | Rebalances: 15
+📅 2024-08: $20,231,373 (+202213.7%) | Completed: 63 | Active: 3 | Rebalances: 15
+
+📤 Portfolio #64 EXIT - 2024-09-13
+    📊 Reason: PROFIT_TARGET (+20.8%)
+    📈 Return: +20.8% in 483 days
+    💰 Value: $22,300,212.90 -> Total: $22,300,212.90
+
+🔥 Portfolio #65 - 2024-09-13
+    💰 Invested: $22,300,212.90
+    🎯 Assets: ['TSLA', 'UPS', 'INTC']
+    📊 Deviations: ['-36.8%', '-33.3%', '-25.0%']
+📅 2024-10: $21,274,710 (+212647.1%) | Completed: 64 | Active: 3 | Rebalances: 15
+📅 2024-11: $24,603,350 (+245933.5%) | Completed: 64 | Active: 3 | Rebalances: 15
+📅 2025-01: $25,212,183 (+252021.8%) | Completed: 64 | Active: 3 | Rebalances: 15
+📅 2025-04: $18,869,437 (+188594.4%) | Completed: 64 | Active: 3 | Rebalances: 15
+📅 2025-05: $21,919,151 (+219091.5%) | Completed: 64 | Active: 3 | Rebalances: 15
+📅 2025-07: $22,219,706 (+222097.1%) | Completed: 64 | Active: 3 | Rebalances: 15
+📅 2025-08: $21,990,955 (+219809.6%) | Completed: 64 | Active: 3 | Rebalances: 15
+📅 2025-09: $21,981,105 (+219711.1%) | Completed: 64 | Active: 3 | Rebalances: 15
+
+📊 BACKTEST RESULTS
+============================================================
+
+💰 PERFORMANCE:
+   Initial: $10,000.00
+   Final: $21,981,105.19
+   Total Return: +219711.05%
+   Period: 24.10 years
+   Annualized: +37.62%
+
+📈 PORTFOLIO STATS:
+   Completed: 64
+   Profit Target Exits: 49
+   Rebalance Exits: 15
+   Avg Return: 13.9%
+   Avg Hold Time: 187 days
+   Min Hold Time: 3 days
+   Max Hold Time: 959 days
+
+🔄 REBALANCE STATS:
+   Total Rebalances: 15
+   Avg Trigger Deviation: 200.3%
+
+🎯 FIRST 3 REBALANCES:
+   #1: 1993-07-05 | Deviation: 181.8% | Days since last: 577
+   #2: 1996-07-04 | Deviation: 180.8% | Days since last: 1095
+   #3: 1999-07-28 | Deviation: 180.5% | Days since last: 1119
+✅ Daily values: /Users/tim/CODE_PROJECTS/IWLS_WEEKLY/RESULTS/UNDERPERFORMANCE_BACKTEST_DAILY.csv
+✅ Portfolios: /Users/tim/CODE_PROJECTS/IWLS_WEEKLY/RESULTS/UNDERPERFORMANCE_BACKTEST_PORTFOLIOS.csv
+✅ Rebalances: /Users/tim/CODE_PROJECTS/IWLS_WEEKLY/RESULTS/UNDERPERFORMANCE_BACKTEST_REBALANCES.csv
