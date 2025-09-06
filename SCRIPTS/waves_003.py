@@ -46,56 +46,95 @@ def analyze_rolling_range_deciles():
     
     # Create rolling range deciles
     print(f"\n🔍 Creating rolling range deciles...")
-    complete_data['range_decile'] = pd.qcut(
-        complete_data['rolling_range_pct_6_month'], 
-        q=10, 
-        labels=['D1 (Low)', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10 (High)'],
-        precision=1
-    )
+    
+    # Check for zero or duplicate values
+    range_values = complete_data['rolling_range_pct_6_month']
+    zero_count = (range_values == 0).sum()
+    unique_values = range_values.nunique()
+    
+    print(f"   Zero range values: {zero_count:,}")
+    print(f"   Unique range values: {unique_values:,}")
+    print(f"   Range statistics: min={range_values.min():.2f}%, max={range_values.max():.2f}%")
+    
+    # Filter out zero or very small ranges (less than 0.1%)
+    print(f"   Filtering out ranges < 0.1% to improve decile quality...")
+    filtered_data = complete_data[complete_data['rolling_range_pct_6_month'] >= 0.1].copy()
+    print(f"   Records after filtering: {len(filtered_data):,}")
+    
+    if len(filtered_data) < 1000:
+        print(f"❌ Insufficient data after filtering for decile analysis")
+        return None, None
+    
+    # Create deciles with duplicate handling
+    try:
+        filtered_data['range_decile'] = pd.qcut(
+            filtered_data['rolling_range_pct_6_month'], 
+            q=10, 
+            labels=['D1 (Low)', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10 (High)'],
+            precision=1,
+            duplicates='drop'  # Handle duplicate bin edges
+        )
+        complete_data = filtered_data
+        print(f"✅ Successfully created 10 deciles")
+    except ValueError as e:
+        print(f"⚠️  Still having issues with deciles, trying quintiles...")
+        try:
+            filtered_data['range_decile'] = pd.qcut(
+                filtered_data['rolling_range_pct_6_month'], 
+                q=5, 
+                labels=['Q1 (Low)', 'Q2', 'Q3', 'Q4', 'Q5 (High)'],
+                precision=1,
+                duplicates='drop'
+            )
+            complete_data = filtered_data
+            print(f"✅ Successfully created 5 quintiles")
+        except ValueError as e2:
+            print(f"❌ Cannot create bins: {e2}")
+            return None, None
     
     # Show decile boundaries
     decile_boundaries = complete_data.groupby('range_decile')['rolling_range_pct_6_month'].agg(['min', 'max', 'mean', 'count'])
     
-    print(f"\n📋 ROLLING RANGE DECILE BOUNDARIES:")
-    print(f"{'Decile':>12} | {'Min':>8} | {'Max':>8} | {'Mean':>8} | {'Count':>8}")
+    print(f"\n📋 ROLLING RANGE DECILE/QUINTILE BOUNDARIES:")
+    print(f"{'Bin':>12} | {'Min':>8} | {'Max':>8} | {'Mean':>8} | {'Count':>8}")
     print("-" * 60)
     
-    for decile in decile_boundaries.index:
-        min_val = decile_boundaries.loc[decile, 'min']
-        max_val = decile_boundaries.loc[decile, 'max']
-        mean_val = decile_boundaries.loc[decile, 'mean']
-        count_val = int(decile_boundaries.loc[decile, 'count'])
+    for bin_name in decile_boundaries.index:
+        min_val = decile_boundaries.loc[bin_name, 'min']
+        max_val = decile_boundaries.loc[bin_name, 'max']
+        mean_val = decile_boundaries.loc[bin_name, 'mean']
+        count_val = int(decile_boundaries.loc[bin_name, 'count'])
         
-        print(f"{decile:>12} | {min_val:>7.1f}% | {max_val:>7.1f}% | {mean_val:>7.1f}% | {count_val:>8,}")
+        print(f"{bin_name:>12} | {min_val:>7.1f}% | {max_val:>7.1f}% | {mean_val:>7.1f}% | {count_val:>8,}")
     
     # Analyze forward performance by decile
-    print(f"\n📈 FORWARD PERFORMANCE BY ROLLING RANGE DECILE:")
+    print(f"\n📈 FORWARD PERFORMANCE BY ROLLING RANGE BIN:")
     print("-" * 90)
-    print(f"{'Decile':>12} | {'Count':>8} | {'Avg Return':>11} | {'Avg Max Gain':>12} | {'Avg Max DD':>11}")
+    print(f"{'Bin':>12} | {'Count':>8} | {'Avg Return':>11} | {'Avg Max Gain':>12} | {'Avg Max DD':>11}")
     print("-" * 90)
     
     decile_results = []
     
-    for decile in decile_boundaries.index:
-        decile_data = complete_data[complete_data['range_decile'] == decile]
+    for bin_name in decile_boundaries.index:
+        bin_data = complete_data[complete_data['range_decile'] == bin_name]
         
-        if len(decile_data) > 0:
-            avg_return = decile_data['forward_return_12_month'].mean()
-            avg_max_gain = decile_data['max_gain_12_month'].mean()
-            avg_max_dd = decile_data['max_drawdown_12_month'].mean()
-            count = len(decile_data)
+        if len(bin_data) > 0:
+            avg_return = bin_data['forward_return_12_month'].mean()
+            avg_max_gain = bin_data['max_gain_12_month'].mean()
+            avg_max_dd = bin_data['max_drawdown_12_month'].mean()
+            count = len(bin_data)
             
-            print(f"{decile:>12} | {count:>8,} | {avg_return:>10.1f}% | {avg_max_gain:>11.1f}% | {avg_max_dd:>10.1f}%")
+            print(f"{bin_name:>12} | {count:>8,} | {avg_return:>10.1f}% | {avg_max_gain:>11.1f}% | {avg_max_dd:>10.1f}%")
             
             decile_results.append({
-                'decile': decile,
+                'bin': bin_name,
                 'count': count,
                 'avg_forward_return': avg_return,
                 'avg_max_gain': avg_max_gain,
                 'avg_max_drawdown': avg_max_dd,
-                'range_min': decile_boundaries.loc[decile, 'min'],
-                'range_max': decile_boundaries.loc[decile, 'max'],
-                'range_mean': decile_boundaries.loc[decile, 'mean']
+                'range_min': decile_boundaries.loc[bin_name, 'min'],
+                'range_max': decile_boundaries.loc[bin_name, 'max'],
+                'range_mean': decile_boundaries.loc[bin_name, 'mean']
             })
     
     return pd.DataFrame(decile_results), complete_data
@@ -122,23 +161,46 @@ def analyze_quintile_position_combinations():
     ]
     
     complete_data = df.dropna(subset=required_columns).copy()
+    
+    # Filter out tiny ranges like above
+    complete_data = complete_data[complete_data['rolling_range_pct_6_month'] >= 0.1].copy()
     print(f"📊 Complete records for quintile analysis: {len(complete_data):,}")
     
     # Create rolling range quintiles
-    complete_data['range_quintile'] = pd.qcut(
-        complete_data['rolling_range_pct_6_month'], 
-        q=5, 
-        labels=['Q1 (Low)', 'Q2', 'Q3', 'Q4', 'Q5 (High)'],
-        precision=1
-    )
+    try:
+        complete_data['range_quintile'] = pd.qcut(
+            complete_data['rolling_range_pct_6_month'], 
+            q=5, 
+            labels=['Q1 (Low)', 'Q2', 'Q3', 'Q4', 'Q5 (High)'],
+            precision=1,
+            duplicates='drop'
+        )
+    except ValueError:
+        print("⚠️  Using percentile-based quintiles")
+        complete_data['range_quintile'] = pd.cut(
+            complete_data['rolling_range_pct_6_month'].rank(pct=True),
+            bins=[0, 0.2, 0.4, 0.6, 0.8, 1.0],
+            labels=['Q1 (Low)', 'Q2', 'Q3', 'Q4', 'Q5 (High)'],
+            include_lowest=True
+        )
     
     # Create position thirds
-    complete_data['position_third'] = pd.qcut(
-        complete_data['position_pct_6_month'], 
-        q=3, 
-        labels=['Bottom Third', 'Middle Third', 'Top Third'],
-        precision=1
-    )
+    try:
+        complete_data['position_third'] = pd.qcut(
+            complete_data['position_pct_6_month'], 
+            q=3, 
+            labels=['Bottom Third', 'Middle Third', 'Top Third'],
+            precision=1,
+            duplicates='drop'
+        )
+    except ValueError:
+        print("⚠️  Using percentile-based position thirds")
+        complete_data['position_third'] = pd.cut(
+            complete_data['position_pct_6_month'].rank(pct=True),
+            bins=[0, 0.333, 0.667, 1.0],
+            labels=['Bottom Third', 'Middle Third', 'Top Third'],
+            include_lowest=True
+        )
     
     print(f"\n🎯 QUINTILE × POSITION COMBINATION ANALYSIS:")
     print("Forward 12-month performance by rolling range quintile and position within range")
@@ -208,6 +270,7 @@ def analyze_volatility_persistence():
     
     # Filter to records with rolling range data
     range_data = df.dropna(subset=['rolling_range_pct_6_month']).copy()
+    range_data = range_data[range_data['rolling_range_pct_6_month'] >= 0.1].copy()  # Filter tiny ranges
     print(f"📊 Records with rolling range data: {len(range_data):,}")
     
     # Create 6-month periods for analysis
@@ -251,7 +314,7 @@ def analyze_volatility_persistence():
             )
         return group
     
-    period_quartiles = period_asset_ranges.groupby('period').apply(assign_quartiles).reset_index(drop=True)
+    period_quartiles = period_asset_ranges.groupby('period').apply(assign_quartiles, include_groups=False).reset_index()
     
     print(f"📈 Analyzing persistence patterns...")
     
@@ -281,7 +344,9 @@ def analyze_volatility_persistence():
         current_consecutive_bottom = 0
         
         for q in quartiles:
-            if q == 'Q4 (Top 25%)':
+            if pd.isna(q):
+                continue
+            elif q == 'Q4 (Top 25%)':
                 current_consecutive_top += 1
                 max_consecutive_top = max(max_consecutive_top, current_consecutive_top)
                 current_consecutive_bottom = 0

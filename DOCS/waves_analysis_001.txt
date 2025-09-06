@@ -1,0 +1,138 @@
+➜  IWLS_WEEKLY git:(main) ✗ /usr/local/bin/python3 /Users/tim/CODE_PROJECTS/IWLS_WEEKLY/SCRIPTS/waves_003.py
+COMPREHENSIVE WAVE PHYSICS ANALYSIS
+============================================================
+1. Rolling range deciles vs. forward performance
+2. Range quintiles × position combinations
+3. Volatility persistence patterns (market-adjusted)
+
+ROLLING RANGE DECILE ANALYSIS
+==================================================
+📁 Loading enhanced dataset: /Users/tim/CODE_PROJECTS/IWLS_WEEKLY/RESULTS/IWLS_WITH_WAVE_ANALYSIS.csv
+✅ Successfully loaded 916,878 records
+📊 Complete records for analysis: 888,932
+
+🔍 Creating rolling range deciles...
+   Zero range values: 184,497
+   Unique range values: 232,855
+   Range statistics: min=0.00%, max=3026.83%
+   Filtering out ranges < 0.1% to improve decile quality...
+   Records after filtering: 704,433
+✅ Successfully created 10 deciles
+
+📋 ROLLING RANGE DECILE/QUINTILE BOUNDARIES:
+         Bin |      Min |      Max |     Mean |    Count
+------------------------------------------------------------
+    D1 (Low) |     0.1% |    13.4% |    10.8% |   70,456
+          D2 |    13.4% |    16.8% |    15.2% |   70,431
+          D3 |    16.8% |    20.0% |    18.4% |   70,482
+          D4 |    20.0% |    23.2% |    21.6% |   70,420
+          D5 |    23.2% |    27.0% |    25.1% |   70,429
+          D6 |    27.0% |    31.9% |    29.4% |   70,520
+          D7 |    31.9% |    37.9% |    34.7% |   70,394
+          D8 |    37.9% |    47.4% |    42.3% |   70,414
+          D9 |    47.4% |    67.2% |    55.8% |   70,443
+  D10 (High) |    67.2% |  3026.8% |   114.1% |   70,444
+
+📈 FORWARD PERFORMANCE BY ROLLING RANGE BIN:
+------------------------------------------------------------------------------------------
+         Bin |    Count |  Avg Return | Avg Max Gain |  Avg Max DD
+------------------------------------------------------------------------------------------
+    D1 (Low) |   70,456 |       12.3% |        21.1% |      -14.8%
+          D2 |   70,431 |       12.1% |        22.8% |      -17.5%
+          D3 |   70,482 |       12.4% |        24.0% |      -18.7%
+          D4 |   70,420 |       14.1% |        26.6% |      -19.9%
+          D5 |   70,429 |       15.2% |        28.9% |      -21.3%
+          D6 |   70,520 |       16.3% |        31.0% |      -22.5%
+          D7 |   70,394 |       19.0% |        35.4% |      -24.3%
+          D8 |   70,414 |       23.1% |        40.6% |      -25.3%
+          D9 |   70,443 |       31.0% |        52.1% |      -28.7%
+  D10 (High) |   70,444 |       41.1% |        72.0% |      -35.2%
+
+================================================================================
+QUINTILE × POSITION ANALYSIS
+================================================================================
+📊 Complete records for quintile analysis: 704,433
+
+🎯 QUINTILE × POSITION COMBINATION ANALYSIS:
+Forward 12-month performance by rolling range quintile and position within range
+
+ Range Quintile |     Position |    Count |  Avg Return | Avg Max Gain
+---------------------------------------------------------------------------
+       Q1 (Low) | Bottom Third |   48,880 |       12.2% |        22.7%
+       Q1 (Low) | Middle Third |   55,080 |       12.1% |        21.5%
+       Q1 (Low) |    Top Third |   36,927 |       12.4% |        21.4%
+             Q2 | Bottom Third |   44,171 |       12.3% |        25.9%
+             Q2 | Middle Third |   50,859 |       13.8% |        25.7%
+             Q2 |    Top Third |   45,872 |       13.6% |        24.3%
+             Q3 | Bottom Third |   41,559 |       15.6% |        32.1%
+             Q3 | Middle Third |   47,867 |       15.5% |        29.8%
+             Q3 |    Top Third |   51,523 |       16.2% |        28.3%
+             Q4 | Bottom Third |   45,435 |       20.6% |        38.8%
+             Q4 | Middle Third |   43,862 |       22.5% |        39.8%
+             Q4 |    Top Third |   51,511 |       20.4% |        35.7%
+      Q5 (High) | Bottom Third |   54,766 |       35.1% |        61.0%
+      Q5 (High) | Middle Third |   37,155 |       34.4% |        60.9%
+      Q5 (High) |    Top Third |   48,966 |       38.4% |        64.1%
+
+🏆 BEST COMBINATIONS:
+   Highest avg return: Q5 (High) + Top Third = 38.4%
+   Highest avg max gain: Q5 (High) + Top Third = 64.1%
+
+================================================================================
+VOLATILITY PERSISTENCE ANALYSIS
+================================================================================
+Question: Do assets tend to stay in high/low volatility quartiles consistently?
+
+📊 Records with rolling range data: 726,861
+🕐 Analyzing persistence across 6-month periods...
+📊 Calculating market-adjusted rolling ranges...
+✅ Market noise adjustment complete
+📈 Analyzing persistence patterns...
+
+📊 PERSISTENCE SUMMARY:
+   Assets analyzed: 89
+   High volatility persistent (>50% in top quartile): 24
+   Low volatility persistent (>50% in bottom quartile): 11
+   Mixed pattern assets: 54
+
+🌊 MOST PERSISTENTLY HIGH VOLATILITY ASSETS:
+ Asset | Periods |  Top Q % | Max Consec |         Pattern
+------------------------------------------------------------
+  PLTR |      61 |    96.7% |         59 | High Persistence
+  CRWD |      76 |    96.1% |         49 | High Persistence
+  TSLA |     184 |    90.8% |         60 | High Persistence
+   GEV |      19 |    89.5% |         17 | High Persistence
+    MU |     472 |    85.6% |         86 | High Persistence
+  NFLX |     281 |    85.1% |        116 | High Persistence
+  DASH |      58 |    84.5% |         38 | High Persistence
+  UBER |      77 |    84.4% |         17 | High Persistence
+  NVDA |     321 |    81.3% |         84 | High Persistence
+  PANW |     159 |    67.3% |         23 | High Persistence
+
+📊 MOST CONSISTENTLY LOW VOLATILITY ASSETS:
+ Asset | Periods | Bottom Q % | Max Consec |         Pattern
+-----------------------------------------------------------------
+    PG |     472 |      68.6% |         48 | High Persistence
+   JNJ |     472 |      66.5% |         50 | High Persistence
+   PEP |     472 |      66.3% |         40 | High Persistence
+    KO |     472 |      62.7% |         37 | High Persistence
+   XOM |     472 |      61.9% |         48 | High Persistence
+   NEE |     472 |      60.6% |         44 | High Persistence
+    VZ |     472 |      55.9% |         43 | High Persistence
+   MMM |     472 |      55.7% |         58 | High Persistence
+   MCD |     472 |      55.3% |         33 | High Persistence
+     T |     472 |      55.1% |         22 | High Persistence
+
+💾 SAVING ANALYSIS RESULTS...
+✅ Decile analysis: /Users/tim/CODE_PROJECTS/IWLS_WEEKLY/RESULTS/ROLLING_RANGE_DECILE_ANALYSIS.csv
+✅ Combination analysis: /Users/tim/CODE_PROJECTS/IWLS_WEEKLY/RESULTS/QUINTILE_POSITION_COMBINATION_ANALYSIS.csv
+✅ Persistence analysis: /Users/tim/CODE_PROJECTS/IWLS_WEEKLY/RESULTS/VOLATILITY_PERSISTENCE_ANALYSIS.csv
+📊 All wave physics analysis results saved!
+
+✨ WAVE PHYSICS ANALYSIS COMPLETE!
+🎯 Key Questions Answered:
+   📊 Do higher rolling ranges predict better forward performance?
+   📍 What's the optimal combination of range + position?
+   🔄 Which assets are chronically volatile vs. occasionally spiky?
+   🌊 Are your 'loaded springs' persistent or random?
+➜  IWLS_WEEKLY git:(main) ✗ 
