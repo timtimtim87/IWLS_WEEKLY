@@ -7,19 +7,21 @@ warnings.filterwarnings('ignore')
 
 class WaveRangeBacktester:
     """
-    Wave Range backtest strategy with SPY comparison:
+    Wave Range backtest strategy with SPY comparison and max hold duration:
     1. Find 5 highest rolling range assets (biggest waves)
     2. Split $10,000 equally amongst them ($2,000 each)
     3. Track portfolio value daily
-    4. Exit when portfolio hits +50% total return
+    4. Exit when portfolio hits +50% total return OR 250 days max hold
     5. Immediately re-enter with new highest wave assets
     6. Compare performance against SPY buy-and-hold for each period
+    7. Start from 1994 onwards to ensure fair SPY comparison
     """
     
-    def __init__(self, initial_capital=10000, num_positions=5, profit_target=50.0):
+    def __init__(self, initial_capital=10000, num_positions=5, profit_target=50.0, max_hold_days=250):
         self.initial_capital = initial_capital
         self.num_positions = num_positions
         self.profit_target = profit_target  # 50% profit target
+        self.max_hold_days = max_hold_days  # Maximum hold duration
         
     def load_data(self):
         """Load the IWLS data with wave analysis"""
@@ -130,18 +132,23 @@ class WaveRangeBacktester:
         return None
     
     def prepare_data(self, df):
-        """Prepare and clean data for backtesting"""
+        """Prepare and clean data for backtesting, starting from 1994"""
         print("🔧 Preparing wave trading data...")
         
         # Keep only records with wave analysis and prices
         clean_data = df.dropna(subset=['rolling_range_pct_6_month', 'price']).copy()
         
+        # Filter to start from 1994 onwards for fair SPY comparison
+        start_date = pd.to_datetime('1994-01-01')
+        clean_data = clean_data[clean_data['date'] >= start_date].copy()
+        
         # Sort chronologically
         clean_data = clean_data.sort_values(['date', 'asset']).reset_index(drop=True)
         
-        print(f"📊 Clean records: {len(clean_data):,}")
-        print(f"📅 Date range: {clean_data['date'].min().strftime('%Y-%m-%d')} to {clean_data['date'].max().strftime('%Y-%m-%d')}")
-        print(f"🏢 Unique assets: {clean_data['asset'].nunique()}")
+        print(f"📊 Clean records (1994+): {len(clean_data):,}")
+        if len(clean_data) > 0:
+            print(f"📅 Date range: {clean_data['date'].min().strftime('%Y-%m-%d')} to {clean_data['date'].max().strftime('%Y-%m-%d')}")
+            print(f"🏢 Unique assets: {clean_data['asset'].nunique()}")
         
         return clean_data
     
@@ -221,7 +228,7 @@ class WaveRangeBacktester:
         return total_value
     
     def backtest_strategy(self):
-        """Run the wave range backtest with SPY comparison"""
+        """Run the wave range backtest with SPY comparison and max hold duration"""
         
         # Load and prepare data
         df = self.load_data()
@@ -233,15 +240,17 @@ class WaveRangeBacktester:
         # Load SPY data
         spy_df = self.load_spy_data()
         
-        # Find start of data with wave values
+        # Find start of data (should be 1994+ now)
         start_date = data['date'].min()
         end_date = data['date'].max()
         
-        print(f"\n🚀 STARTING WAVE RANGE BACKTEST WITH SPY COMPARISON")
-        print("="*70)
+        print(f"\n🚀 STARTING WAVE RANGE BACKTEST WITH MAX HOLD & SPY COMPARISON")
+        print("="*75)
         print(f"💰 Initial capital: ${self.initial_capital:,.2f}")
-        print(f"🌊 Strategy: Buy {self.num_positions} highest rolling range assets, exit at +{self.profit_target}%")
+        print(f"🌊 Strategy: Buy {self.num_positions} highest rolling range assets")
+        print(f"🎯 Exit conditions: +{self.profit_target}% profit OR {self.max_hold_days} days max hold")
         print(f"📅 Backtest period: {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}")
+        print(f"📈 SPY comparison: Fair from 1994+ (avoiding early 1986-1993 advantage)")
         
         # Get all unique trading dates
         all_dates = sorted(data['date'].unique())
@@ -296,6 +305,10 @@ class WaveRangeBacktester:
         print(f"    🌊 Assets: {[pos['asset'] for pos in active_positions]}")
         print(f"    📊 Rolling Ranges: {[f'{pos['rolling_range']:.1f}%' for pos in active_positions]}")
         
+        # Track exit reasons
+        profit_exits = 0
+        time_exits = 0
+        
         # Main backtest loop
         for i, current_date in enumerate(all_dates):
             
@@ -307,13 +320,24 @@ class WaveRangeBacktester:
                 # Calculate portfolio value
                 portfolio_value = self.calculate_portfolio_value(active_positions, current_prices)
                 
-                # Calculate return
+                # Calculate return and hold time
                 total_invested = sum(pos['investment'] for pos in active_positions)
                 portfolio_return = ((portfolio_value / total_invested) - 1) * 100
                 hold_days = (current_date - portfolio_entry_date).days
                 
-                # Check for exit condition
-                if portfolio_return >= self.profit_target:
+                # Check exit conditions: profit target OR max hold time
+                profit_target_hit = portfolio_return >= self.profit_target
+                max_hold_hit = hold_days >= self.max_hold_days
+                
+                if profit_target_hit or max_hold_hit:
+                    # Determine exit reason
+                    if profit_target_hit:
+                        exit_reason = f"PROFIT_TARGET (+{portfolio_return:.1f}%)"
+                        profit_exits += 1
+                    else:
+                        exit_reason = f"MAX_HOLD ({hold_days} days, {portfolio_return:+.1f}%)"
+                        time_exits += 1
+                    
                     # Calculate SPY performance for this period
                     spy_entry_price = self.get_spy_price_on_date(spy_daily, portfolio_entry_date)
                     spy_current_price = self.get_spy_price_on_date(spy_daily, current_date)
@@ -334,6 +358,7 @@ class WaveRangeBacktester:
                         'invested': total_invested,
                         'exit_value': portfolio_value,
                         'return_pct': portfolio_return,
+                        'exit_reason': exit_reason,
                         'assets': [pos['asset'] for pos in active_positions],
                         'rolling_ranges': [pos['rolling_range'] for pos in active_positions],
                         'spy_entry_price': spy_entry_price,
@@ -346,6 +371,7 @@ class WaveRangeBacktester:
                     completed_portfolios.append(completed_portfolio)
                     
                     print(f"\n📤 Portfolio #{portfolio_number} EXIT - {current_date.strftime('%Y-%m-%d')}")
+                    print(f"    📊 Exit Reason: {exit_reason}")
                     print(f"    📊 Wave Strategy Return: {portfolio_return:+.1f}% in {hold_days} days")
                     print(f"    📈 SPY Return: {spy_period_return:+.1f}% in {hold_days} days")
                     print(f"    🎯 Excess Return: {portfolio_return - spy_period_return:+.1f}%")
@@ -422,7 +448,8 @@ class WaveRangeBacktester:
                 excess_monthly = total_return - spy_return_pct
                 print(f"📅 {current_date.strftime('%Y-%m')}: Wave: ${total_account_value:,.0f} ({total_return:+.1f}%) | "
                       f"SPY: ${spy_current_value:,.0f} ({spy_return_pct:+.1f}%) | "
-                      f"Excess: {excess_monthly:+.1f}% | Completed: {len(completed_portfolios)}")
+                      f"Excess: {excess_monthly:+.1f}% | Completed: {len(completed_portfolios)} | "
+                      f"Profit Exits: {profit_exits} | Time Exits: {time_exits}")
         
         # Final calculations
         final_value = current_capital
@@ -449,16 +476,18 @@ class WaveRangeBacktester:
             'spy_total_return': ((final_spy_value / self.initial_capital) - 1) * 100,
             'active_positions': active_positions,
             'spy_start_price': spy_start_price,
-            'final_spy_price': final_spy_price
+            'final_spy_price': final_spy_price,
+            'profit_exits': profit_exits,
+            'time_exits': time_exits
         }
     
     def analyze_results(self, results):
-        """Analyze backtest results with SPY comparison"""
+        """Analyze backtest results with SPY comparison and exit analysis"""
         if results is None:
             return
         
-        print(f"\n📊 WAVE RANGE BACKTEST RESULTS WITH SPY COMPARISON")
-        print("="*60)
+        print(f"\n📊 WAVE RANGE BACKTEST RESULTS WITH MAX HOLD & SPY COMPARISON")
+        print("="*70)
         
         # Overall performance comparison
         print(f"\n💰 OVERALL PERFORMANCE:")
@@ -485,6 +514,17 @@ class WaveRangeBacktester:
                 print(f"   SPY Annualized:        {spy_annualized:+.2f}%")
                 print(f"   Excess Annualized:     {wave_annualized - spy_annualized:+.2f}%")
         
+        # Exit reason analysis
+        profit_exits = results.get('profit_exits', 0)
+        time_exits = results.get('time_exits', 0)
+        total_exits = profit_exits + time_exits
+        
+        print(f"\n🎯 EXIT REASON ANALYSIS:")
+        print(f"   Total Completed Portfolios: {total_exits}")
+        print(f"   Profit Target Exits: {profit_exits} ({(profit_exits/total_exits*100):.1f}%)")
+        print(f"   Max Hold Time Exits: {time_exits} ({(time_exits/total_exits*100):.1f}%)")
+        print(f"   Capital Recycling Effect: {time_exits} portfolios freed up by max hold rule")
+        
         # Portfolio statistics with SPY comparison
         portfolios = results['completed_portfolios']
         if len(portfolios) > 0:
@@ -493,29 +533,33 @@ class WaveRangeBacktester:
             excess_returns = [p['excess_return'] for p in portfolios]
             hold_times = [p['hold_days'] for p in portfolios]
             
+            # Separate by exit reason
+            profit_portfolios = [p for p in portfolios if 'PROFIT_TARGET' in p['exit_reason']]
+            time_portfolios = [p for p in portfolios if 'MAX_HOLD' in p['exit_reason']]
+            
             print(f"\n📈 PORTFOLIO STATISTICS:")
             print(f"   Completed: {len(portfolios)}")
-            print(f"   All hit {self.profit_target}% target")
             print(f"   ")
-            print(f"   Wave Strategy Returns:")
-            print(f"     Average: {np.mean(returns):.1f}%")
-            print(f"     Min: {min(returns):.1f}%")
-            print(f"     Max: {max(returns):.1f}%")
-            print(f"   ")
-            print(f"   SPY Period Returns:")
-            print(f"     Average: {np.mean(spy_returns):.1f}%")
-            print(f"     Min: {min(spy_returns):.1f}%")
-            print(f"     Max: {max(spy_returns):.1f}%")
-            print(f"   ")
-            print(f"   Excess Returns:")
-            print(f"     Average: {np.mean(excess_returns):.1f}%")
-            print(f"     Min: {min(excess_returns):.1f}%")
-            print(f"     Max: {max(excess_returns):.1f}%")
-            print(f"   ")
-            print(f"   Hold Times:")
-            print(f"     Average: {np.mean(hold_times):.0f} days")
-            print(f"     Min: {min(hold_times):.0f} days")
-            print(f"     Max: {max(hold_times):.0f} days")
+            print(f"   All Portfolios:")
+            print(f"     Average Return: {np.mean(returns):.1f}%")
+            print(f"     Average Hold Time: {np.mean(hold_times):.0f} days")
+            print(f"     Average Excess vs SPY: {np.mean(excess_returns):.1f}%")
+            
+            if len(profit_portfolios) > 0:
+                profit_returns = [p['return_pct'] for p in profit_portfolios]
+                profit_hold_times = [p['hold_days'] for p in profit_portfolios]
+                print(f"   ")
+                print(f"   Profit Target Exits ({len(profit_portfolios)}):")
+                print(f"     Average Return: {np.mean(profit_returns):.1f}%")
+                print(f"     Average Hold Time: {np.mean(profit_hold_times):.0f} days")
+            
+            if len(time_portfolios) > 0:
+                time_returns = [p['return_pct'] for p in time_portfolios]
+                time_hold_times = [p['hold_days'] for p in time_portfolios]
+                print(f"   ")
+                print(f"   Max Hold Exits ({len(time_portfolios)}):")
+                print(f"     Average Return: {np.mean(time_returns):.1f}%")
+                print(f"     Average Hold Time: {np.mean(time_hold_times):.0f} days")
             
             # Win rate vs SPY
             outperformed_spy = sum(1 for p in portfolios if p.get('outperformed_spy', False))
@@ -523,43 +567,6 @@ class WaveRangeBacktester:
             print(f"   ")
             print(f"   Performance vs SPY:")
             print(f"     Outperformed: {outperformed_spy}/{len(portfolios)} ({win_rate_vs_spy:.1f}%)")
-            
-            # Portfolio comparison table
-            print(f"\n📋 PORTFOLIO vs SPY COMPARISON:")
-            print("="*90)
-            print(f"{'Port#':>5} | {'Entry Date':>12} | {'Exit Date':>12} | {'Days':>5} | "
-                  f"{'Wave':>9} | {'SPY':>9} | {'Excess':>8} | {'Winner':>8}")
-            print("-"*90)
-            
-            for p in portfolios:
-                excess = p.get('excess_return', p['return_pct'] - p['spy_period_return'])
-                winner = "Wave" if excess > 0 else "SPY" if excess < 0 else "Tie"
-                
-                print(f"#{p['portfolio_number']:>4} | {p['entry_date'].strftime('%Y-%m-%d'):>12} | "
-                      f"{p['exit_date'].strftime('%Y-%m-%d'):>12} | {p['hold_days']:>5} | "
-                      f"{p['return_pct']:>8.1f}% | {p['spy_period_return']:>8.1f}% | "
-                      f"{excess:>+7.1f}% | {winner:>8}")
-            
-            # Summary row
-            print("-"*90)
-            avg_wave = np.mean([p['return_pct'] for p in portfolios])
-            avg_spy = np.mean([p['spy_period_return'] for p in portfolios])
-            avg_excess = avg_wave - avg_spy
-            
-            print(f"{'AVG':>5} | {'':>12} | {'':>12} | {np.mean([p['hold_days'] for p in portfolios]):>5.0f} | "
-                  f"{avg_wave:>8.1f}% | {avg_spy:>8.1f}% | {avg_excess:>+7.1f}% | {'':>8}")
-            
-            # Show first few portfolios
-            print(f"\n🎯 FIRST 5 WAVE PORTFOLIOS WITH SPY COMPARISON:")
-            for i, p in enumerate(portfolios[:5]):
-                excess = p.get('excess_return', p['return_pct'] - p['spy_period_return'])
-                print(f"   #{i+1}: {p['entry_date'].strftime('%Y-%m-%d')} -> {p['exit_date'].strftime('%Y-%m-%d')} "
-                      f"({p['hold_days']} days)")
-                print(f"        Wave: {p['return_pct']:.1f}%, SPY: {p['spy_period_return']:.1f}%, "
-                      f"Excess: {excess:+.1f}%")
-                print(f"        Assets: {p['assets']}")
-                avg_range = np.mean(p['rolling_ranges'])
-                print(f"        Avg Rolling Range: {avg_range:.1f}%")
         
         return results
     
@@ -573,9 +580,9 @@ class WaveRangeBacktester:
         # Save daily tracking with SPY comparison
         if len(results['daily_tracking']) > 0:
             daily_df = pd.DataFrame(results['daily_tracking'])
-            daily_file = os.path.join(results_dir, "WAVE_RANGE_BACKTEST_DAILY_WITH_SPY.csv")
+            daily_file = os.path.join(results_dir, "WAVE_RANGE_MAX_HOLD_BACKTEST_DAILY.csv")
             daily_df.to_csv(daily_file, index=False)
-            print(f"✅ Daily values with SPY: {daily_file}")
+            print(f"✅ Daily values: {daily_file}")
         
         # Save completed portfolios with SPY comparison
         if len(results['completed_portfolios']) > 0:
@@ -583,9 +590,9 @@ class WaveRangeBacktester:
             # Convert lists to strings for CSV
             portfolios_df['assets'] = portfolios_df['assets'].astype(str)
             portfolios_df['rolling_ranges'] = portfolios_df['rolling_ranges'].astype(str)
-            portfolio_file = os.path.join(results_dir, "WAVE_RANGE_BACKTEST_PORTFOLIOS_WITH_SPY.csv")
+            portfolio_file = os.path.join(results_dir, "WAVE_RANGE_MAX_HOLD_BACKTEST_PORTFOLIOS.csv")
             portfolios_df.to_csv(portfolio_file, index=False)
-            print(f"✅ Portfolios with SPY: {portfolio_file}")
+            print(f"✅ Portfolios: {portfolio_file}")
         
         # Create summary statistics
         summary_stats = {
@@ -597,11 +604,13 @@ class WaveRangeBacktester:
                 'SPY Total Return %',
                 'Excess Return %',
                 'Total Portfolios',
+                'Profit Target Exits',
+                'Max Hold Exits',
                 'Portfolios Outperforming SPY',
                 'Win Rate vs SPY %',
                 'Average Portfolio Return %',
-                'Average SPY Period Return %',
-                'Average Excess Return %'
+                'Average Hold Days',
+                'Max Hold Days Setting'
             ],
             'value': [
                 self.initial_capital,
@@ -611,33 +620,38 @@ class WaveRangeBacktester:
                 results['spy_total_return'],
                 results['total_return'] - results['spy_total_return'],
                 len(results['completed_portfolios']),
+                results.get('profit_exits', 0),
+                results.get('time_exits', 0),
                 sum(1 for p in results['completed_portfolios'] if p.get('outperformed_spy', False)),
                 (sum(1 for p in results['completed_portfolios'] if p.get('outperformed_spy', False)) / 
                  len(results['completed_portfolios']) * 100) if results['completed_portfolios'] else 0,
                 np.mean([p['return_pct'] for p in results['completed_portfolios']]) if results['completed_portfolios'] else 0,
-                np.mean([p['spy_period_return'] for p in results['completed_portfolios']]) if results['completed_portfolios'] else 0,
-                np.mean([p.get('excess_return', 0) for p in results['completed_portfolios']]) if results['completed_portfolios'] else 0
+                np.mean([p['hold_days'] for p in results['completed_portfolios']]) if results['completed_portfolios'] else 0,
+                self.max_hold_days
             ]
         }
         
         summary_df = pd.DataFrame(summary_stats)
-        summary_file = os.path.join(results_dir, "WAVE_RANGE_BACKTEST_SUMMARY_WITH_SPY.csv")
+        summary_file = os.path.join(results_dir, "WAVE_RANGE_MAX_HOLD_BACKTEST_SUMMARY.csv")
         summary_df.to_csv(summary_file, index=False)
         print(f"✅ Summary statistics: {summary_file}")
 
 
-def run_wave_range_backtest():
-    """Run the wave range backtest with SPY comparison"""
-    print("🌊 WAVE RANGE BACKTEST WITH SPY COMPARISON")
+def run_wave_range_max_hold_backtest():
+    """Run the wave range backtest with max hold duration and SPY comparison"""
+    print("🌊 WAVE RANGE BACKTEST WITH MAX HOLD DURATION")
     print("="*60)
     print("Strategy: Buy highest rolling range assets (biggest waves)")
-    print("Theory: High volatility = high profit potential")
+    print("Exit: +15% profit target OR 250 days max hold")
+    print("Start: 1994+ for fair SPY comparison")
+    print("Theory: High volatility + capital recycling = superior returns")
     print()
     
     backtester = WaveRangeBacktester(
         initial_capital=10000,
         num_positions=9,
-        profit_target=15.0  # 15% profit target
+        profit_target=15.0,    # 15% profit target
+        max_hold_days=200      # 250 days maximum hold
     )
     
     # Run backtest
@@ -651,23 +665,21 @@ def run_wave_range_backtest():
     backtester.analyze_results(results)
     backtester.save_results(results)
     
-    print(f"\n✨ WAVE RANGE BACKTEST WITH SPY COMPARISON COMPLETE!")
+    print(f"\n✨ WAVE RANGE BACKTEST WITH MAX HOLD COMPLETE!")
     print("="*60)
-    print(f"📊 Key Features:")
-    print(f"   • Targets highest rolling range assets (biggest waves)")
-    print(f"   • SPY performance tracking for each portfolio period")
-    print(f"   • Excess return calculation (Wave Strategy - SPY)")
-    print(f"   • Win rate analysis vs SPY")
-    print(f"   • Portfolio-by-portfolio comparison table")
-    print(f"   • Enhanced monthly progress with SPY tracking")
-    print(f"   • Summary statistics with SPY metrics")
+    print(f"📊 Key Features Added:")
+    print(f"   • Max hold duration: {backtester.max_hold_days} days")
+    print(f"   • Capital recycling: Forces exit of stagnant positions")
+    print(f"   • Fair SPY comparison: Starting from 1994+")
+    print(f"   • Exit reason tracking: Profit vs Time exits")
+    print(f"   • Enhanced analysis: Separate stats for each exit type")
     print(f"\n📁 Output Files:")
-    print(f"   • WAVE_RANGE_BACKTEST_DAILY_WITH_SPY.csv")
-    print(f"   • WAVE_RANGE_BACKTEST_PORTFOLIOS_WITH_SPY.csv") 
-    print(f"   • WAVE_RANGE_BACKTEST_SUMMARY_WITH_SPY.csv")
+    print(f"   • WAVE_RANGE_MAX_HOLD_BACKTEST_DAILY.csv")
+    print(f"   • WAVE_RANGE_MAX_HOLD_BACKTEST_PORTFOLIOS.csv") 
+    print(f"   • WAVE_RANGE_MAX_HOLD_BACKTEST_SUMMARY.csv")
     
     return results
 
 
 if __name__ == "__main__":
-    wave_results = run_wave_range_backtest()
+    wave_max_hold_results = run_wave_range_max_hold_backtest()
